@@ -1,0 +1,15 @@
+Source: openpne3-diary
+Section: web
+Priority: optional
+Maintainer: Kimura Youichi <kim.upsilon@bucyou.net>
+Build-Depends: debhelper (>= 7.0.50)
+Standards-Version: 3.8.0
+Homepage: http://www.openpne.jp/
+Vcs-Git: git://github.com/upsilon/opDiaryPlugin.git
+Vcs-Browser: http://github.com/upsilon/opDiaryPlugin
+
+Package: openpne3-diary
+Architecture: all
+Depends: ${misc:Depends}, openpne3 (>= 3.6beta1)
+Description: plugin for OpenPNE3 -- opDiaryPlugin
+
