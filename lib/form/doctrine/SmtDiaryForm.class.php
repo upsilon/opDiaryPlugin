@@ -8,8 +8,7 @@ class SmtDiaryForm extends PluginDiaryForm
     parent::setup();
     sfConfig::set('app_diary_is_upload_images', $_temp_conf);
 
-    $textarea = new opSmtWidgetFormRichTextareaOpenPNE();
-    $this->widgetSchema['body'] = $textarea;
+    $this->widgetSchema['body'] = new opSmtWidgetFormRichTextarea();
   }
 
 
