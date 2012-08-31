@@ -22,13 +22,20 @@ class opDiaryPluginDiaryActions extends opDiaryPluginActions
     $this->forward('diary', 'list');
   }
 
-  public function executeList(sfWebRequest $request)
+  public function executeList(opWebRequest $request)
   {
+    $this->forwardIf($request->isSmartphone(), 'diary', 'smtList');
+
     $publicFlag = $this->getUser()->isSNSMember() ? DiaryTable::PUBLIC_FLAG_SNS : DiaryTable::PUBLIC_FLAG_OPEN;
 
     $this->isSearchEnable =  Doctrine::getTable('SnsConfig')->get('op_diary_plugin_search_enable', '1');
 
     $this->pager = Doctrine::getTable('Diary')->getDiaryPager($request['page'], 20, $publicFlag);
+  }
+
+  public function executeSmtList(opWebRequest $request)
+  {
+    return sfView::SUCCESS;
   }
 
   public function executeSearch(sfWebRequest $request)
