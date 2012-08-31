@@ -102,6 +102,15 @@ Diary:
     public_flag: 1
 <?php endfor; ?>
 
+<?php for ($i = 1; $i <= 60; $i++): ?>
+  diary_for_member1_<?php echo $i ?>:
+    Member: member1
+    title: "title:<?php echo $i ?> by member1"
+    body: "body:<?php echo $i ?> by member1"
+    created_at: "2009-03-<?php printf('%02d', $i) ?> 10:00:00"
+    updated_at: "2009-03-<?php printf('%02d', $i) ?> 10:00:00"
+<?php endfor; ?>
+
 DiaryComment:
   diary_comment1:
     id: 1
