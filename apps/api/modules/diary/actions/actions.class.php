@@ -17,9 +17,15 @@
  */
 class diaryActions extends opJsonApiActions
 {
+  public function preExecute()
+  {
+    parent::preExecute();
+    $this->member = sfContext::getInstance()->getUser()->getMember();
+  }
+
   public function executeList(sfWebRequest $request)
   {
-    $this->data = 'hogehoge';
+    $this->data = 'here comes diary list';
 
     $this->setTemplate('array');
   }
