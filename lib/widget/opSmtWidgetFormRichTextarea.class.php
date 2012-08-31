@@ -1,7 +1,7 @@
 <?php
-class opSmtWidgetFormRichTextareaOpenPNE extends opWidgetFormRichTextarea
+class opSmtWidgetFormRichTextarea extends opWidgetFormRichTextarea
 {
-  static protected $isFirstRenderOpenPNE  = true;
+  static protected $isFirstRender  = true;
 
   static protected $buttons = array(
     'op_emoji_docomo' => array('caption' => 'Input Emoji(DoCoMo)')
@@ -46,7 +46,7 @@ class opSmtWidgetFormRichTextareaOpenPNE extends opWidgetFormRichTextarea
   {
     $js = '';
 
-    if (self::$isFirstRenderOpenPNE)
+    if (self::$isFirstRender)
     {
       sfContext::getInstance()->getResponse()->addSmtJavascript('jquery.min.js');
       sfContext::getInstance()->getResponse()->addSmtJavascript('jquery-ui.min.js');
@@ -59,7 +59,7 @@ class opSmtWidgetFormRichTextareaOpenPNE extends opWidgetFormRichTextarea
       $js .= sprintf("function op_mce_editor_get_config() { return %s; }\n", json_encode(self::getButtons()));
       $js .= sprintf('function op_get_relative_uri_root() { return "%s"; }', $relativeUrlRoot);
 
-      self::$isFirstRenderOpenPNE = false;
+      self::$isFirstRender = false;
     }
 
     if ($js)
