@@ -12,21 +12,7 @@ $mailAddress = 'sns1@example.com';
 $b->login($mailAddress, 'password');
 $b->setCulture('en');
 
-$memberId = Doctrine::getTable('MemberConfig')
-  ->createQuery('c')
-  ->where('c.name = ?', 'pc_address')
-  ->where('c.value = ?', $mailAddress)
-  ->fetchOne()
-  ->getMemberId();
-
-$apiKey = Doctrine::getTable('MemberConfig')
-  ->createQuery('c')
-  ->where('c.member_id = ?', $memberId)
-  ->where('c.name = ?', 'api_key')
-  ->fetchOne()
-  ->getValue();
-
-$apiKey = '?apiKey='.$apiKey;
+$apiKey = '?apiKey=dummyApiKey';
 
 $json = $b->get('/diary/list.json'.$apiKey)
   ->getResponse()->getContent()

@@ -43,6 +43,10 @@ MemberConfig:
     value: "<?php echo md5('password') ?>"
     Member: member<?php echo $i . "\n" ?>
 <?php endfor; ?>
+  member_1_api_key:
+    name: "api_key"
+    value: "dummyApiKey"
+    Member: member1
 
 MemberRelationship:
   member_relationship_1_from_2:
