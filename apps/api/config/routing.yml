@@ -1,0 +1,4 @@
+#diary api routing
+diary_list:
+  url: /diary/list.json
+  param: { module: diary, action: list, sf_format: json }
