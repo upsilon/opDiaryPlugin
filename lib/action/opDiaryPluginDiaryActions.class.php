@@ -98,7 +98,13 @@ class opDiaryPluginDiaryActions extends opDiaryPluginActions
 
   public function executeNew(sfWebRequest $request)
   {
+    $this->forwardIf($request->isSmartphone(), 'diary', 'smtNew');
     $this->form = new DiaryForm();
+  }
+
+  public function executeSmtNew(sfWebRequest $request)
+  {
+    $this->form = new SmtDiaryForm();
   }
 
   public function executeCreate(sfWebRequest $request)
