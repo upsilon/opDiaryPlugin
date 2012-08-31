@@ -58,3 +58,12 @@ function op_diary_url_for_show($diary)
 
   return $internalUri;
 }
+
+function op_api_diary($diary)
+{
+  return array(
+    'id'=>$diary->getId(),
+    'title'=>$diary->getTitle(),
+    'body'=>$diary->getBody()
+  );
+}

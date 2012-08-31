@@ -2,21 +2,21 @@
 
 include dirname(__FILE__).'/../../bootstrap/functional.php';
 
-$b = new opTestFunctional(new sfBrowser());
-$t = new lime_test(null, new lime_output_color());
+$t = new opTestFunctional(new sfBrowser());
 
 include dirname(__FILE__).'/../../bootstrap/database.php';
 
 $mailAddress = 'sns1@example.com';
 
-$b->login($mailAddress, 'password');
-$b->setCulture('en');
+$t->login($mailAddress, 'password');
+$t->setCulture('en');
 
 $apiKey = '?apiKey=dummyApiKey';
 
-$json = $b->get('/diary/list.json'.$apiKey)
+$json = $t->get('/diary/list.json'.$apiKey)
   ->getResponse()->getContent()
 ;
 $data = json_decode($json, true);
-$t->is($data['status'], 'success', 'should return status code "success"');
-$t->is($data['data'], 'here comes diary list', 'return diary list');
+$t->test()->is($data['status'], 'success', 'should return status code "success"');
+$t->test()->is(count($data['data']), 15, 'should return 15 articles');
+var_dump($data['data']);

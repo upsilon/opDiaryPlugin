@@ -25,8 +25,14 @@ class diaryActions extends opJsonApiActions
 
   public function executeList(sfWebRequest $request)
   {
-    $this->data = 'here comes diary list';
+    $this->isSearchEnable =  Doctrine::getTable('SnsConfig')->get('op_diary_plugin_search_enable', '1');
 
+    $query = Doctrine::getTable('Diary')->createQuery('c')
+      ->where('member_id = ?', $this->member->getId())
+      ->limit(sfConfig::get('op_json_api_limit', 15));
+    //var_dump($query->getSqlQuery());die();
+
+    $this->diaries = $query->execute();
     $this->setTemplate('array');
   }
 

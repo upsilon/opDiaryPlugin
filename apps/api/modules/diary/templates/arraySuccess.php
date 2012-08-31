@@ -1,11 +1,12 @@
 <?php
+use_helper('opDiary');
 
-//$data = array();
+$data = array();
 
-//foreach ($members as $member)
-//{
-  //$data[] = op_api_member($member);
-//}
+foreach ($diaries as $diary)
+{
+  $data[] = op_api_diary($diary);
+}
 
 return array(
   'status' => 'success',
