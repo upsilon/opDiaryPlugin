@@ -11,9 +11,11 @@ $mailAddress = 'sns1@example.com';
 $t->login($mailAddress, 'password');
 $t->setCulture('en');
 
-$apiKey = '?apiKey=dummyApiKey';
-
-$json = $t->get('/diary/list.json'.$apiKey)
+$json = $t->get('/diary/list.json',
+    array(
+      'apiKey'=>'dummyApiKey'
+    )
+  )
   ->getResponse()->getContent()
 ;
 $data = json_decode($json, true);

@@ -34,6 +34,7 @@ class diaryActions extends opJsonApiActions
     if(isset($request['id']))
     {
       $diary = Doctrine::getTable('Diary')->findOneById($request['id']);
+      //TODO 本文から文字修飾とGoogleMapを削除する
     }
     else
     {
@@ -73,9 +74,17 @@ class diaryActions extends opJsonApiActions
   {
     $query = Doctrine::getTable('Diary')->createQuery('c')
       ->where('member_id = ?', $this->member->getId())
+      ->orderBy('created_at desc')
       ->limit(sfConfig::get('op_json_api_limit', 15));
 
     $this->diaries = $query->execute();
+  }
+
+  public function executeShow(sfWebRequest $request)
+  {
+    $this->forward400If(!isset($request['id']) || '' === (string)$request['id'], 'id is not specified');
+
+    $this->diary = Doctrine::getTable('Diary')->findOneById($request['id']);
   }
 
 }

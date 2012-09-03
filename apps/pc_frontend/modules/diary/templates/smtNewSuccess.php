@@ -33,7 +33,7 @@ function op_get_relative_uri_root(){ return "<?php echo $relativeUrlRoot;?>";}
     <label class="control-label span12"><?php echo __('Body') ?></label>
 <a id="diary_body_button_op_emoji_docomo" href="#" onclick="$('#diary_body').opEmoji('togglePallet', 'epDocomo'); return false;">
 <img alt="" src="/images/deco_op_emoji_docomo.gif" /></a>
-    <input type="textarea" name="body" id="diary_body" class="span12">
+    <textarea name="body" id="diary_body" class="span12"></textarea>
     <label class="control-label span12"><?php echo __('Public flag') ?></label>
     <ul class="radio_list">
     <?php foreach($publicFlags as $key=>$value):?>

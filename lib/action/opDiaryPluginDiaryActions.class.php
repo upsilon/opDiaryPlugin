@@ -105,6 +105,7 @@ class opDiaryPluginDiaryActions extends opDiaryPluginActions
   public function executeSmtNew(sfWebRequest $request)
   {
     $this->publicFlags = Doctrine::getTable('Diary')->getPublicFlags();
+    unset($this->publicFlags[4]);
     $this->relativeUrlRoot = $request->getRelativeUrlRoot();
   }
 

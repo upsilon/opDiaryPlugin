@@ -61,12 +61,38 @@ function op_diary_url_for_show($diary)
 
 function op_api_diary($diary)
 {
-  return array(
-    'id'          => $diary->getId(),
-    'member'      => op_api_member($diary->getMember()),
-    'title'       => $diary->getTitle(),
-    'body'        => $diary->getBody(),
-    'public_flag' => $diary->getPublicFlag(),
-    'created_at'  => $diary->getCreatedAt()
-  );
+  if($diary)
+  {
+    return array(
+      'id'          => $diary->getId(),
+      'member'      => op_api_member($diary->getMember()),
+      'title'       => $diary->getTitle(),
+      'body'        => $diary->getBody(),
+      'public_flag' => $diary->getPublicFlag(),
+      'updated_at'  => $diary->getUpdatedAt(),
+      'created_at'  => $diary->getCreatedAt(),
+    );
+  }
+}
+
+function op_api_diary_image($image)
+{
+  if($image)
+  {
+    return array(
+      'filename' => $image->getFile()->getName()
+    );
+  }
+}
+
+function op_api_diary_comment($comment)
+{
+  if($comment)
+  {
+    return array(
+      'member' => op_api_member($comment->getMember()),
+      'body'=> $comment->getBody(),
+      'created_at' => $comment->getCreatedAt()
+    );
+  }
 }
