@@ -8,3 +8,8 @@ diary_post:
   url: /diary/post.json
   param: { module: diary, action: post, sf_format: json }
   requirements: { sf_method: [post, get] }
+  
+diary_delete:
+  url: /diary/delete.json
+  param: { module: diary, action: delete, sf_format: json }
+  requirements: { sf_method: [post, get] }

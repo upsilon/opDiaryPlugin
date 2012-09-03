@@ -27,9 +27,9 @@ class diaryActions extends opJsonApiActions
 
   public function executePost(sfWebRequest $request)
   {
-    $this->forward400If('' === (string)$request['title'], 'title parameter not specified.');
-    $this->forward400If('' === (string)$request['body'], 'body parameter not specified.');
-    $this->forward400If(!isset($request['public_flag']) || '' === (string)$request['public_flag'], 'public flag not specified');
+    $this->forward400If('' === (string)$request['title'], 'title parameter is not specified.');
+    $this->forward400If('' === (string)$request['body'], 'body parameter is not specified.');
+    $this->forward400If(!isset($request['public_flag']) || '' === (string)$request['public_flag'], 'public flag is not specified');
 
     if(isset($request['id']))
     {
@@ -46,6 +46,27 @@ class diaryActions extends opJsonApiActions
     $diary->save();
 
     $this->diary = $diary;
+
+    //TODO アクティビティに日記の投稿を表示するようにする
+  }
+
+  public function executeDelete(sfWebRequest $request)
+  {
+    $this->forward400If(!isset($request['id']) || '' === (string)$request['id'], 'id is not specified');
+
+    $diary = Doctrine::getTable('Diary')->findOneById($request['id']);
+    $isDeleted = $diary->delete();
+
+    if ($isDeleted)
+    {
+      $this->id = $request['id'];
+      //TODO アクティビティから日記の投稿を削除する
+    }
+    else
+    {
+      $this->forward400('failed to delete the entry. id:'.$request['id']);
+    }
+
   }
 
   public function executeList(sfWebRequest $request)
