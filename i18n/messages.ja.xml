@@ -98,6 +98,22 @@
         <source>Public flag</source>
         <target>公開範囲</target>
       </trans-unit>
+      <trans-unit id="25">
+        <source>Public to web</source>
+        <target>Web全体に公開</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Public to sns</source>
+        <target>全員に公開</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Public to friends</source>
+        <target>マイフレンドまで公開</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Public to none</source>
+        <target>公開しない</target>
+      </trans-unit>
       <trans-unit id="30">
         <source>The diary was deleted successfully.</source>
         <target>日記を削除しました。</target>

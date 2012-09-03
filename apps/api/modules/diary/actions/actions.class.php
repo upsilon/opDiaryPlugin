@@ -9,7 +9,7 @@
  */
 
 /**
- * diary actions.
+ * diary api actions.
  *
  * @package    OpenPNE
  * @subpackage action
@@ -23,14 +23,33 @@ class diaryActions extends opJsonApiActions
     $this->member = sfContext::getInstance()->getUser()->getMember();
   }
 
+  public function executePost(sfWebRequest $request)
+  {
+    $form = new SmtDiaryForm();
+    $form->bind(
+      $request->getParameter($form->getName())
+    );
+
+    if ($form->isValid())
+    {
+      $this->diary = $form->save();
+      $this->setTemplate('array');
+    }
+    else
+    {
+      $error_messages = array_map(
+          create_function('$e', 'return $e->getMessage();'),
+          $form->getErrorSchema()->getErrors());
+      var_dump($error_messages);
+      $this->forward400($error_messages);
+    }
+  }
+
   public function executeList(sfWebRequest $request)
   {
-    $this->isSearchEnable =  Doctrine::getTable('SnsConfig')->get('op_diary_plugin_search_enable', '1');
-
     $query = Doctrine::getTable('Diary')->createQuery('c')
       ->where('member_id = ?', $this->member->getId())
       ->limit(sfConfig::get('op_json_api_limit', 15));
-    //var_dump($query->getSqlQuery());die();
 
     $this->diaries = $query->execute();
     $this->setTemplate('array');

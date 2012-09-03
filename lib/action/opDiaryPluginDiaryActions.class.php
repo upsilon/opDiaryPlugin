@@ -104,7 +104,7 @@ class opDiaryPluginDiaryActions extends opDiaryPluginActions
 
   public function executeSmtNew(sfWebRequest $request)
   {
-    $this->form = new SmtDiaryForm();
+    $this->relativeUrlRoot = $request->getRelativeUrlRoot();
   }
 
   public function executeCreate(sfWebRequest $request)

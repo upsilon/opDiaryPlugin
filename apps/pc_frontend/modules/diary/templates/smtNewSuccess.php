@@ -4,40 +4,42 @@ $options = array(
   'isMultipart' => true,
 );
 
-if ($form->isNew())
+if (true)
 {
   $title = __('Post a diary');
-  $url = url_for('diary_create');
 }
 else
 {
   $title = __('Edit the diary');
-  $url = url_for('diary_update', $diary);
 }
 ?>
+<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/op_emoji.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+$(function(){ $("#diary_body").opEmoji(); });
+//]]>
+function op_get_relative_uri_root(){ return "<?php echo $relativeUrlRoot;?>";}
+</script>
 <div class="row">
   <div class="gadget_header span12"><?php echo __($title) ?></div>
 </div>
 
 <div class="row">
   <div class="span12">
-    <?php echo form_tag($sf_request->getCurrentUri()); ?>
-    <?php foreach ($form as $field): ?>
-    <?php if (!$field->isHidden()): ?>
-      <div class="control-group<?php echo $field->hasError()? ' error' : '' ?>">
-        <label class="control-label"><?php echo $field->renderLabel() ?></label>
-        <div class="controls">
-        <?php if ($field->hasError()): ?>
-        <span class="label label-important label-block"><?php echo __($field->renderError()); ?></span>
-        <?php endif ?>
-        <?php echo $field->render(array('class' => 'span12')) ?>
-        <span class="help-block"><?php echo $field->renderHelp(); ?></span>    
-        </div>
-      </div>
-    <?php endif; ?>
-    <?php endforeach; ?>
+    <label class="control-label span12"><?php echo __('Title') ?></label>
+    <input type="text" name="title" id="title" class="span12">
+    <label class="control-label span12"><?php echo __('Body') ?></label>
+<a id="diary_body_button_op_emoji_docomo" href="#" onclick="$('#diary_body').opEmoji('togglePallet', 'epDocomo'); return false;">
+<img alt="" src="/images/deco_op_emoji_docomo.gif" /></a>
+    <input type="textarea" name="body" id="diary_body" class="span12">
+    <label class="control-label span12"><?php echo __('Public flag') ?></label>
+    <ul class="radio_list">
+      <li><input name="public_flag" value="4" id="diary_public_flag_4" class="input_radio" type="radio">&nbsp;<label for="diary_public_flag_4"><?php echo __('Public to web'); ?></label></li>
+      <li><input name="public_flag" value="1" id="diary_public_flag_1" checked="checked" class="input_radio" type="radio">&nbsp;<label for="diary_public_flag_1"><?php echo __('Public to sns'); ?></label></li>
+      <li><input name="public_flag" value="2" id="diary_public_flag_2" class="input_radio" type="radio">&nbsp;<label for="diary_public_flag_2"><?php echo __('Public to friends'); ?></label></li>
+      <li><input name="public_flag" value="3" id="diary_public_flag_3" class="input_radio" type="radio">&nbsp;<label for="diary_public_flag_3"><?php echo __('Public to none'); ?></label></li>
+    </ul>
     <input type="submit" name="submit" value="<?php echo __('Send') ?>" class="btn btn-primary span12" />
-    <?php echo $form->renderHiddenFields(); ?>
-    </form>
   </div>
 </div>

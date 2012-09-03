@@ -78,6 +78,5 @@ class opSmtWidgetFormRichTextarea extends opWidgetFormRichTextarea
       '</div>'.$this->getOption('textarea_template'));
 
     return $js.parent::render($name, $value, $attributes, $errors);
-    //return parent::render($name, $value, $attributes, $errors);
   }
 }

@@ -3,3 +3,8 @@ diary_index:
   url: /diary/list.json
   param: { module: diary, action: list, sf_format: json }
   requirements: { sf_method: [get] }
+
+diary_post:
+  url: /diary/post.json
+  param: { module: diary, action: post, sf_format: json }
+  requirements: { sf_method: [post, get] }
