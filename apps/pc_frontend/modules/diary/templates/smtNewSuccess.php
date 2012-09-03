@@ -7,6 +7,7 @@ $options = array(
 if (true)
 {
   $title = __('Post a diary');
+  $checked = 1;
 }
 else
 {
@@ -35,10 +36,9 @@ function op_get_relative_uri_root(){ return "<?php echo $relativeUrlRoot;?>";}
     <input type="textarea" name="body" id="diary_body" class="span12">
     <label class="control-label span12"><?php echo __('Public flag') ?></label>
     <ul class="radio_list">
-      <li><input name="public_flag" value="4" id="diary_public_flag_4" class="input_radio" type="radio">&nbsp;<label for="diary_public_flag_4"><?php echo __('Public to web'); ?></label></li>
-      <li><input name="public_flag" value="1" id="diary_public_flag_1" checked="checked" class="input_radio" type="radio">&nbsp;<label for="diary_public_flag_1"><?php echo __('Public to sns'); ?></label></li>
-      <li><input name="public_flag" value="2" id="diary_public_flag_2" class="input_radio" type="radio">&nbsp;<label for="diary_public_flag_2"><?php echo __('Public to friends'); ?></label></li>
-      <li><input name="public_flag" value="3" id="diary_public_flag_3" class="input_radio" type="radio">&nbsp;<label for="diary_public_flag_3"><?php echo __('Public to none'); ?></label></li>
+    <?php foreach($publicFlags as $key=>$value):?>
+      <li><input name="public_flag" value="<?php echo $key;?>" id="diary_public_flag_<?php echo $key;?>" class="input_radio" type="radio" <?php if($checked == $key) echo 'checked'?>>&nbsp;<label for="diary_public_flag_<?php echo $key;?>"><?php echo $value;?></label></li>
+    <?php endforeach; ?>
     </ul>
     <input type="submit" name="submit" value="<?php echo __('Send') ?>" class="btn btn-primary span12" />
   </div>

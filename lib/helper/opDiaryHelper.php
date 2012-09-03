@@ -62,8 +62,11 @@ function op_diary_url_for_show($diary)
 function op_api_diary($diary)
 {
   return array(
-    'id'=>$diary->getId(),
-    'title'=>$diary->getTitle(),
-    'body'=>$diary->getBody()
+    'id'          => $diary->getId(),
+    'member'      => op_api_member($diary->getMember()),
+    'title'       => $diary->getTitle(),
+    'body'        => $diary->getBody(),
+    'public_flag' => $diary->getPublicFlag(),
+    'created_at'  => $diary->getCreatedAt()
   );
 }

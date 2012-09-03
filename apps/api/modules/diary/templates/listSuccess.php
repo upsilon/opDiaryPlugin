@@ -3,9 +3,12 @@ use_helper('opDiary');
 
 $data = array();
 
-foreach ($diaries as $diary)
+if (count($diaries))
 {
-  $data[] = op_api_diary($diary);
+  foreach ($diaries as $diary)
+  {
+    $data[] = op_api_diary($diary);
+  }
 }
 
 return array(

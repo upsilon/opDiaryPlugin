@@ -20,29 +20,32 @@ class diaryActions extends opJsonApiActions
   public function preExecute()
   {
     parent::preExecute();
-    $this->member = sfContext::getInstance()->getUser()->getMember();
+    //myUser.class.php内でApiキーのチェックが行われているので
+    //preExecuteでユーザ情報を取得してチェックを走らせる
+    $this->member = $this->getUser()->getMember();
   }
 
   public function executePost(sfWebRequest $request)
   {
-    $form = new SmtDiaryForm();
-    $form->bind(
-      $request->getParameter($form->getName())
-    );
+    $this->forward400If('' === (string)$request['title'], 'title parameter not specified.');
+    $this->forward400If('' === (string)$request['body'], 'body parameter not specified.');
+    $this->forward400If(!isset($request['public_flag']) || '' === (string)$request['public_flag'], 'public flag not specified');
 
-    if ($form->isValid())
+    if(isset($request['id']))
     {
-      $this->diary = $form->save();
-      $this->setTemplate('array');
+      $diary = Doctrine::getTable('Diary')->findOneById($request['id']);
     }
     else
     {
-      $error_messages = array_map(
-          create_function('$e', 'return $e->getMessage();'),
-          $form->getErrorSchema()->getErrors());
-      var_dump($error_messages);
-      $this->forward400($error_messages);
+      $diary = new Diary();
     }
+    $diary->setMemberId($this->member->getId());
+    $diary->setTitle($request['title']);
+    $diary->setBody($request['body']);
+    $diary->setPublicFlag($request['public_flag']);
+    $diary->save();
+
+    $this->diary = $diary;
   }
 
   public function executeList(sfWebRequest $request)
@@ -52,7 +55,6 @@ class diaryActions extends opJsonApiActions
       ->limit(sfConfig::get('op_json_api_limit', 15));
 
     $this->diaries = $query->execute();
-    $this->setTemplate('array');
   }
 
 }
