@@ -17,7 +17,7 @@ $t->info('for the first thing, post a entry to delete afterwords');
 $title = 'テストタイトル';
 $body = 'テスト本文';
 $publicFlag = 1;//全員に公開
-$json = $t->get('/diary/post.json',
+$json = $t->post('/diary/post.json',
     array(
       'apiKey'      => 'dummyApiKey',
       'title'       => $title,
@@ -38,7 +38,7 @@ $t->test()->ok($data['data']['created_at'], 'should have the date posted');
 $deleteId = $data['data']['id'];
 
 $t->info('should be able to delete the entry');
-$json = $t->get('/diary/delete.json',
+$json = $t->post('/diary/delete.json',
     array(
       'apiKey'      => 'dummyApiKey',
       'id' => $deleteId
@@ -51,7 +51,7 @@ $t->test()->is($deleteId, $data['data']['id'], 'should have the same id posted')
 
 $diary = Doctrine::getTable('Diary')->findOneByMemberId(5);
 $t->info('should NOT be able to delete an entry of other person\'s');
-$json = $t->get('/diary/delete.json',
+$json = $t->post('/diary/delete.json',
     array(
       'apiKey'      => 'dummyApiKey',
       'id' => $diary->getId()

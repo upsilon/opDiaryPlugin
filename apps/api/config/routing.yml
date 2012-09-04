@@ -7,12 +7,12 @@ diary_index:
 diary_post:
   url: /diary/post.json
   param: { module: diary, action: post, sf_format: json }
-  requirements: { sf_method: [post, get] }
+  requirements: { sf_method: [post] }
 
 diary_delete:
   url: /diary/delete.json
   param: { module: diary, action: delete, sf_format: json }
-  requirements: { sf_method: [get] }
+  requirements: { sf_method: [post] }
 
 diary_show:
   url: /diary/show.json
@@ -22,4 +22,4 @@ diary_show:
 diary_comment_post:
   url: /diary_comment/post.json
   param: { module: diaryComment, action: post, sf_format: json }
-  requirements: { sf_method: post }
+  requirements: { sf_method: [post] }

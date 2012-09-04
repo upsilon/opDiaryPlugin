@@ -15,7 +15,7 @@ $t->info('should be able to post a new diary entry');
 $title = 'テストタイトル';
 $body = 'テスト本文';
 $publicFlag = 1;//全員に公開
-$json = $t->get('/diary/post.json',
+$json = $t->post('/diary/post.json',
     array(
       'apiKey'      => 'dummyApiKey',
       'title'       => $title,
@@ -34,7 +34,7 @@ $t->test()->is($data['data']['public_flag'], $publicFlag, 'should have the same 
 $t->test()->ok($data['data']['created_at'], 'should have the date posted');
 
 $t->info('should return error when the title is empty');
-$json = $t->get('/diary/post.json',
+$json = $t->post('/diary/post.json',
     array(
       'apiKey'      => 'dummyApiKey',
       'title'       => '',
@@ -47,7 +47,7 @@ $json = $t->get('/diary/post.json',
   ->end()
 ;
 
-$json = $t->get('/diary/post.json',
+$json = $t->post('/diary/post.json',
     array(
       'apiKey'      => 'dummyApiKey',
       'body'        => $body,
@@ -60,7 +60,7 @@ $json = $t->get('/diary/post.json',
 ;
 
 $t->info('should return error when the body is empty');
-$json = $t->get('/diary/post.json',
+$json = $t->post('/diary/post.json',
     array(
       'apiKey'      => 'dummyApiKey',
       'title'       => $title,
@@ -73,7 +73,7 @@ $json = $t->get('/diary/post.json',
   ->end()
 ;
 
-$json = $t->get('/diary/post.json',
+$json = $t->post('/diary/post.json',
     array(
       'apiKey'      => 'dummyApiKey',
       'title'       => $title,
@@ -86,7 +86,7 @@ $json = $t->get('/diary/post.json',
 ;
 
 $t->info('should return error when the public flag is empty');
-$json = $t->get('/diary/post.json',
+$json = $t->post('/diary/post.json',
     array(
       'apiKey'      => 'dummyApiKey',
       'title'       => $title,
@@ -99,7 +99,7 @@ $json = $t->get('/diary/post.json',
   ->end()
 ;
 
-$json = $t->get('/diary/post.json',
+$json = $t->post('/diary/post.json',
     array(
       'apiKey'      => 'dummyApiKey',
       'title'       => $title,
@@ -116,7 +116,7 @@ $id = 1;
 $title = '編集後のテストタイトル'.time();
 $body = '編集後のテスト本文'.time();
 $publicFlag = 3;//全員に公開
-$json = $t->get('/diary/post.json',
+$json = $t->post('/diary/post.json',
     array(
       'id'          => $id,
       'apiKey'      => 'dummyApiKey',
