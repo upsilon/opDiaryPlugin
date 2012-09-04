@@ -53,9 +53,11 @@ class diaryActions extends opJsonApiActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $this->forward400If(!isset($request['id']) || '' === (string)$request['id'], 'id is not specified');
+    $this->forward400If(!isset($request['id']) || '' === (string)$request['id'], 'a diary id is not specified');
 
     $diary = Doctrine::getTable('Diary')->findOneById($request['id']);
+    $this->forward400If(false == $diary->isAuthor($this->member->getId()), 'this diary entry is not yours');
+
     $isDeleted = $diary->delete();
 
     if ($isDeleted)
