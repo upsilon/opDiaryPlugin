@@ -104,9 +104,7 @@ class opDiaryPluginDiaryActions extends opDiaryPluginActions
 
   public function executeSmtNew(sfWebRequest $request)
   {
-    $this->publicFlags = Doctrine::getTable('Diary')->getPublicFlags();
-    unset($this->publicFlags[4]);
-    $this->relativeUrlRoot = $request->getRelativeUrlRoot();
+    $this->smtPost($request);
   }
 
   public function executeCreate(sfWebRequest $request)
@@ -120,8 +118,19 @@ class opDiaryPluginDiaryActions extends opDiaryPluginActions
   public function executeEdit(sfWebRequest $request)
   {
     $this->forward404Unless($this->isDiaryAuthor());
+    $this->forwardIf($request->isSmartphone(), 'diary', 'smtEdit');
 
     $this->form = new DiaryForm($this->diary);
+  }
+
+  public function executeSmtEdit(sfWebRequest $request)
+  {
+    $this->diary = Doctrine::getTable('Diary')->findOneById($request['id']);
+    $body = $this->diary->getBody();
+    $body = preg_replace('/<op:.*>.*<\/op:.*>/', '', $body);
+    $body = preg_replace('/http.:\/\/maps\.google\.co[[:graph:]]*/', '', $body);
+    $this->diary->setBody($body);
+    $this->smtPost($request);
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -165,5 +174,14 @@ class opDiaryPluginDiaryActions extends opDiaryPluginActions
 
       $this->redirect('@diary_show?id='.$diary->id);
     }
+  }
+
+  protected function smtPost(sfWebRequest $request)
+  {
+    $this->publicFlags = Doctrine::getTable('Diary')->getPublicFlags();
+    unset($this->publicFlags[4]);
+    $this->relativeUrlRoot = $request->getRelativeUrlRoot();
+    $this->setLayout('smtLayoutSns');
+    $this->setTemplate('smtPost');
   }
 }

@@ -1,17 +1,19 @@
 <?php
-$options = array(
-  'button' => __('Save'),
-  'isMultipart' => true,
-);
-
-if (true)
+if ($diary)
 {
-  $title = __('Post a diary');
-  $checked = 1;
+  $title = __('Edit the diary');
+  $diaryId    = $diary->getId();
+  $diaryTitle = $diary->getTitle();
+  $diaryBody  = $diary->getBody();
+  $publicFlag = $diary->getPublicFlag();
 }
 else
 {
-  $title = __('Edit the diary');
+  $title = __('Post a diary');
+  $diaryId    = '';
+  $diaryTitle = '';
+  $diaryBody  = '';
+  $publicFlag = 1;
 }
 ?>
 <?php use_helper('opAsset');?>
@@ -58,9 +60,13 @@ $(document).ready(function(){
     )
     .success(
       function(res){
-        $('#title').val('');
-        $('#diary_body').val('');
-        $('#success').show();
+        if (params['id'] == '')
+        {
+          $('#id').val('');
+          $('#title').val('');
+          $('#diary_body').val('');
+          $('#diary_public_flag_1').attr('checked', true);
+        }
         var _mes = $('#successMessageTemplate').tmpl(res['data']);
         $('#successMessage').html(_mes);
       }
@@ -89,16 +95,17 @@ $(document).ready(function(){
 <div class="row">
   <div class="span12">
     <form>
+    <input type="hidden" name="id" id="id" value="<?php echo $diaryId ?>"/>
     <label class="control-label span12"><?php echo __('Title') ?></label>
-    <input type="text" name="title" id="title" class="span12">
+    <input type="text" name="title" id="title" class="span12" value="<?php echo $diaryTitle ?>">
     <label class="control-label span12"><?php echo __('Body') ?></label>
 <a id="diary_body_button_op_emoji_docomo" href="#" onclick="$('#diary_body').opEmoji('togglePallet', 'epDocomo'); return false;">
 <img alt="" src="/images/deco_op_emoji_docomo.gif" /></a>
-    <textarea name="body" id="diary_body" class="span12" rows="10"></textarea>
+    <textarea name="body" id="diary_body" class="span12" rows="10"><?php echo $diaryBody ?></textarea>
     <label class="control-label span12"><?php echo __('Public flag') ?></label>
     <ul class="radio_list">
     <?php foreach($publicFlags as $key=>$value):?>
-      <li><input name="public_flag" value="<?php echo $key;?>" id="diary_public_flag_<?php echo $key;?>" class="input_radio" type="radio" <?php if($checked == $key) echo 'checked'?>>&nbsp;<label for="diary_public_flag_<?php echo $key;?>"><?php echo $value;?></label></li>
+      <li><input name="public_flag" value="<?php echo $key;?>" id="diary_public_flag_<?php echo $key;?>" class="input_radio" type="radio" <?php if($publicFlag == $key) echo 'checked'?>>&nbsp;<label for="diary_public_flag_<?php echo $key;?>"><?php echo $value;?></label></li>
     <?php endforeach; ?>
     </ul>
     </form>

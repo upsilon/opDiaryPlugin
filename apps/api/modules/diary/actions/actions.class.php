@@ -31,10 +31,9 @@ class diaryActions extends opJsonApiActions
     $this->forward400If('' === (string)$request['body'], 'body parameter is not specified.');
     $this->forward400If(!isset($request['public_flag']) || '' === (string)$request['public_flag'], 'public flag is not specified');
 
-    if(isset($request['id']))
+    if(isset($request['id']) && '' !== $request['id'])
     {
       $diary = Doctrine::getTable('Diary')->findOneById($request['id']);
-      //TODO 本文から文字修飾とGoogleMapを削除する
     }
     else
     {

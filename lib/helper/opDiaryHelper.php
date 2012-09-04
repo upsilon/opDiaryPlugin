@@ -63,6 +63,8 @@ function op_api_diary($diary)
 {
   if($diary)
   {
+    //todo 本文から文字修飾を取り除く
+    //todo 本文からgoogle mapを取り除く
     return array(
       'id'          => $diary->getId(),
       'member'      => op_api_member($diary->getMember()),
