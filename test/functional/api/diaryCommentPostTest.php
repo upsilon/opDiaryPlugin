@@ -30,3 +30,29 @@ $t->test()->is($data['data']['diary_id'], $diary->getId(), 'should have the same
 $t->test()->is($data['data']['body'], $body, 'should have the same body posted');
 $t->test()->ok($data['data']['created_at'], 'should have the date posted');
 $t->test()->is($data['data']['images'], array(), 'should have the images field which is an empty array');
+
+$t->info('should NOT be able to post a new comment without body');
+$diary = Doctrine::getTable('Diary')->findOneByMemberId(1);
+$body = '';
+$json = $t->post('/diary_comment/post.json',
+    array(
+      'apiKey'      => 'dummyApiKey',
+      'diary_id'       => $diary->getId(),
+      'body'        => $body,
+    )
+  )
+  ->with('response')->begin()
+    ->isStatusCode(400)
+  ->end()
+;
+
+$json = $t->post('/diary_comment/post.json',
+    array(
+      'apiKey'      => 'dummyApiKey',
+      'diary_id'       => $diary->getId(),
+    )
+  )
+  ->with('response')->begin()
+    ->isStatusCode(400)
+  ->end()
+;
