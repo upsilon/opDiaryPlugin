@@ -23,3 +23,8 @@ diary_comment_post:
   url: /diary_comment/post.json
   param: { module: diaryComment, action: post, sf_format: json }
   requirements: { sf_method: [post] }
+
+diary_comment_delete:
+  url: /diary_comment/delete.json
+  param: { module: diaryComment, action: delete, sf_format: json }
+  requirements: { sf_method: [post] }

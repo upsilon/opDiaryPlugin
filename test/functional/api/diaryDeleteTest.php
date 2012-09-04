@@ -50,7 +50,7 @@ $t->test()->is($data['status'], 'success', 'should return status code "success"'
 $t->test()->is($deleteId, $data['data']['id'], 'should have the same id posted');
 
 $diary = Doctrine::getTable('Diary')->findOneByMemberId(5);
-$t->info('should NOT be able to delete an entry of other person\'s');
+$t->info('should NOT be able to delete an entry of other people\'s');
 $json = $t->post('/diary/delete.json',
     array(
       'apiKey'      => 'dummyApiKey',

@@ -67,7 +67,7 @@ class diaryActions extends opJsonApiActions
     }
     else
     {
-      $this->forward400('failed to delete the entry. id:'.$request['id']);
+      $this->forward400('failed to delete the entry. errorStack:'.$diary->getErrorStackAsString());
     }
 
   }

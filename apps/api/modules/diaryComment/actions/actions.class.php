@@ -39,6 +39,22 @@ class diaryCommentActions extends opJsonApiActions
 
   public function executeDelete(sfWebRequest $request)
   {
+    $id = $request['id'];
+    $this->forward400If('' === (string)$id, 'id parameter is not specified.');
+
+    $comment = Doctrine::getTable('DiaryComment')->findOneById($id);
+
+    $this->forward400If(false === $comment->isDeletable($this->member->getId()), 'you can not delete this comment. id:'.$id);
+
+    $isDeleted = $comment->delete();
+    if ($isDeleted)
+    {
+      $this->id = $id;
+    }
+    else
+    {
+      $this->forward400('failed to delete the comment. errorStack:'.$comment->getErrorStackAsString());
+    }
   }
 
 }
