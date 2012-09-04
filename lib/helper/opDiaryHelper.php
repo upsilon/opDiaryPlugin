@@ -89,10 +89,22 @@ function op_api_diary_comment($comment)
 {
   if($comment)
   {
+    $images = array();
+    if ($comment->getHasImages())
+    {
+      foreach($comment->getDiaryCommentImages() as $image)
+      {
+        $images[] = op_api_diary_image($image);
+      }
+    }
     return array(
+      'id' => $comment->getId(),
+      'diary_id' => $comment->getDiaryId(),
+      'number' => $comment->getNumber(),
       'member' => op_api_member($comment->getMember()),
       'body'=> $comment->getBody(),
-      'created_at' => $comment->getCreatedAt()
+      'created_at' => $comment->getCreatedAt(),
+      'images' => $images
     );
   }
 }

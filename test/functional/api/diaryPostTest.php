@@ -11,8 +11,6 @@ $mailAddress = 'sns1@example.com';
 $t->login($mailAddress, 'password');
 $t->setCulture('en');
 
-$apiKey = '?apiKey=dummyApiKey';
-
 $t->info('should be able to post a new diary entry');
 $title = 'テストタイトル';
 $body = 'テスト本文';

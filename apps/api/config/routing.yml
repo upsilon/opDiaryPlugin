@@ -18,3 +18,8 @@ diary_show:
   url: /diary/show.json
   param: { module: diary, action: show, sf_format: json }
   requirements: { sf_method: [get] }
+
+diary_comment_post:
+  url: /diary_comment/post.json
+  param: { module: diaryComment, action: post, sf_format: json }
+  requirements: { sf_method: post }
