@@ -16,6 +16,8 @@ else
 ?>
 <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/op_emoji.js"></script>
+<script type="text/javascript" src="/js/Selection.js"></script>
+<script type="text/javascript" src="/js/decoration.js"></script>
 <script type="text/javascript">
 //<![CDATA[
 $(function(){ $("#diary_body").opEmoji(); });
