@@ -3,6 +3,3 @@ all:
 
 smtListSuccess:
   layout: smtLayoutSns
-
-smtNewSuccess:
-  layout: smtLayoutSns

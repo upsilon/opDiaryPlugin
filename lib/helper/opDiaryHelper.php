@@ -59,6 +59,18 @@ function op_diary_url_for_show($diary)
   return $internalUri;
 }
 
+function emojicode_to_image($matches)
+{
+  $emoji = new OpenPNE_KtaiEmoji_Img();
+  return $emoji->get_emoji4emoji_code_id($matches[1]);
+}
+
+function op_api_diary_convert_emoji($str)
+{
+    $pattern = '/\[([ies]:[0-9]{1,3})\]/';
+    return preg_replace_callback($pattern, 'emojicode_to_image', $str);
+}
+
 function op_api_diary($diary)
 {
   if($diary)
@@ -69,10 +81,10 @@ function op_api_diary($diary)
       'id'          => $diary->getId(),
       'member'      => op_api_member($diary->getMember()),
       'title'       => $diary->getTitle(),
-      'body'        => $diary->getBody(),
+      'body'        => op_api_diary_convert_emoji(nl2br(op_truncate($diary->getBody(),60))),
       'public_flag' => $diary->getPublicFlag(),
-      'updated_at'  => $diary->getUpdatedAt(),
-      'created_at'  => $diary->getCreatedAt(),
+      'updated_at'  => op_format_activity_time(strtotime($diary->getUpdatedAt())),
+      'created_at'  => op_format_activity_time(strtotime($diary->getCreatedAt())),
     );
   }
 }

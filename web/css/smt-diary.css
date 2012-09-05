@@ -1,0 +1,17 @@
+#loading {
+  margin: 10px;
+}
+
+.readmore {
+  float:right;
+}
+
+.entry {
+  border-bottom: 1px solid silver;
+  padding: 5px 0px;
+}
+
+.title {
+  font-weight: bold;
+  margin-right: 5px;
+}

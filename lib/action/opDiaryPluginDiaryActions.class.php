@@ -62,6 +62,8 @@ class opDiaryPluginDiaryActions extends opDiaryPluginActions
           sfConfig::get('sf_login_module'), sfConfig::get('sf_login_action'));
     }
 
+    $this->forwardIf($request->isSmartphone(), 'diary', 'smtListMember');
+
     $this->year  = (int)$request['year'];
     $this->month = (int)$request['month'];
     $this->day   = (int)$request['day'];
@@ -72,6 +74,12 @@ class opDiaryPluginDiaryActions extends opDiaryPluginActions
     }
 
     $this->pager = Doctrine::getTable('Diary')->getMemberDiaryPager($this->member->id, $request['page'], 20, $this->myMemberId, $this->year, $this->month, $this->day);
+  }
+
+  public function executeSmtListMember(sfWebRequest $request)
+  {
+    $this->id = $request['id'];
+    $this->setTemplate('smtList');
   }
 
   public function executeListFriend(sfWebRequest $request)

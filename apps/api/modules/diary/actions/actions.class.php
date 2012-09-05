@@ -73,12 +73,24 @@ class diaryActions extends opJsonApiActions
 
   public function executeList(sfWebRequest $request)
   {
+    $page = isset($request['page']) ? $request['page'] : 1;
+    $limit = sfConfig::get('op_json_api_limit', 15);
     $query = Doctrine::getTable('Diary')->createQuery('c')
-      ->where('member_id = ?', $this->member->getId())
       ->orderBy('created_at desc')
-      ->limit(sfConfig::get('op_json_api_limit', 15));
+      ->offset(($page - 1) * $limit)
+      ->limit($limit);
+    if ($request['id'])
+    {
+      $query->where('member_id = ?', $request['id']);
+    }
 
     $this->diaries = $query->execute();
+    $total = $query->count();
+    $this->next = false;
+    if ($total > $page * $limit)
+    {
+      $this->next = $page + 1;
+    }
   }
 
   public function executeShow(sfWebRequest $request)

@@ -46,7 +46,7 @@ function toggleSubmitButton()
   $('input[name=submit]').toggle();
 }
 
-$(document).ready(function(){
+$(function(){
   $("#diary_body").opEmoji();
 
   $("#post_diary").click(function(){
