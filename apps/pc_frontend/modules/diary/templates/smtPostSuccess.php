@@ -21,6 +21,12 @@ else
 <?php op_smt_use_javascript('op_emoji.js', 'last'); ?>
 <?php op_smt_use_javascript('Selection.js', 'last'); ?>
 <?php op_smt_use_javascript('decoration.js', 'last'); ?>
+
+<script id="successMessageTemplate" type="text/x-jquery-tmpl">
+    投稿しました<br/>
+    <a href="/diary/${id}">日記を見る</a>
+</script>
+
 <script type="text/javascript">
 function op_get_relative_uri_root()
 {
@@ -40,7 +46,7 @@ function getParams()
   return json;
 }
 
-function toggleSubmitButton()
+function toggleSubmitState()
 {
   $('#loading').toggle();
   $('input[name=submit]').toggle();
@@ -51,7 +57,7 @@ $(function(){
 
   $("#post_diary").click(function(){
     $('#successMessage').html('');
-    toggleSubmitButton();
+    toggleSubmitState();
     var params = getParams();
 
     $.post(openpne.apiBase + "diary/post.json",
@@ -78,16 +84,13 @@ $(function(){
     )
     .complete(
       function(res){
-        toggleSubmitButton();
+        toggleSubmitState();
       }
     );
   });
 })
 </script>
-<script id="successMessageTemplate" type="text/x-jquery-tmpl">
-    投稿しました<br/>
-    <a href="/diary/${id}">日記を見る</a>
-</script>
+
 <div class="row">
   <div class="gadget_header span12"><?php echo __($title) ?></div>
 </div>

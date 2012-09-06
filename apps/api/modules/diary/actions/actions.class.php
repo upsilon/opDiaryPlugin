@@ -81,7 +81,7 @@ class diaryActions extends opJsonApiActions
       ->limit($limit);
     if ($request['id'])
     {
-      $query->where('member_id = ?', $request['id']);
+      $query->addWhere('member_id = ?', $request['id']);
     }
 
     $this->diaries = $query->execute();
@@ -97,6 +97,7 @@ class diaryActions extends opJsonApiActions
   {
     $this->forward400If(!isset($request['id']) || '' === (string)$request['id'], 'id is not specified');
 
+    $this->memberId = $this->getUser()->getMemberId();
     $this->diary = Doctrine::getTable('Diary')->findOneById($request['id']);
   }
 

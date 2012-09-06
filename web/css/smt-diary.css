@@ -15,3 +15,26 @@
   font-weight: bold;
   margin-right: 5px;
 }
+
+#show .images a {
+  display: block;
+  margin: 5px;
+}
+
+#show .siblings {
+  margin-bottom: 5px;
+}
+
+#show #comments {
+  background-color: #ddd;
+}
+
+#show #commentForm {
+  background-color: #ddd;
+  padding-top: 3px;
+  margin-bottom: 5px;
+}
+
+#show #comments .row {
+  margin-top: 3px;
+}

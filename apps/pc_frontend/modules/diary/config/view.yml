@@ -3,3 +3,7 @@ all:
 
 smtListSuccess:
   layout: smtLayoutSns
+
+smtShowSuccess:
+  layout: smtLayoutMember
+

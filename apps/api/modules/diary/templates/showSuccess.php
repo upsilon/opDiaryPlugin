@@ -1,6 +1,5 @@
 <?php
 use_helper('opDiary');
-
 $data = array();
 
 if (isset($diary))
@@ -12,7 +11,9 @@ if (isset($diary))
   }
   $comments = $diary->getDiaryComments();
   foreach($comments as $comment){
-    $data['comments'][] = op_api_diary_comment($comment);
+    $_data = op_api_diary_comment($comment);
+    $_data['deletable'] = $comment->isDeletable($memberId);
+    $data['comments'][] = $_data;
   }
   $data['next'] = op_api_diary($diary->getNext($diary->getMemberId()));
   $data['prev'] = op_api_diary($diary->getPrevious($diary->getMemberId()));

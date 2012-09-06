@@ -8,7 +8,7 @@ if (isset($id))
 }
 else
 {
-  $gadgetTitle = __('Recently Posted Diaries');
+  $gadgetTitle = __('Recently Posted Diaries of All');
   $id = 'null';
 }
 ?>
@@ -21,17 +21,18 @@ else
   <div class="span9">
     <div>
       <span class="title">${title}</span>
-      {{html body}}
+      {{html body_short}}
       <a href="/diary/${id}" class="readmore">続き</a>
     </div>
     <div class="clearfix"></div>
     <div class="row">
       <p class="span3"><a href="${member.profile_url}">{{if member.screen_name}} ${member.screen_name} {{else}} ${member.name} {{/if}}</a></p>
-      <p class="span6">${created_at}</p>
+      <p class="span6">${ago}</p>
     </div>
   </div>
 </div>
 </script>
+
 <script type="text/javascript">
 function getList(params)
 {
@@ -40,7 +41,6 @@ function getList(params)
   {
     params.id = id;
   }
-  console.debug(params);
   $('#loading').show();
   $.getJSON( openpne.apiBase + 'diary/list.json',
     params,
@@ -73,6 +73,7 @@ $(function(){
   })
 })
 </script>
+
 <div class="row">
   <h3 class="gadget_header span12"><?php echo $gadgetTitle; ?></h3>
 </div>

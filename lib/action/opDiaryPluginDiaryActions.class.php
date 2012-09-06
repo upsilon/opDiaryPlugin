@@ -101,7 +101,26 @@ class opDiaryPluginDiaryActions extends opDiaryPluginActions
       Doctrine::getTable('DiaryCommentUnread')->unregister($this->diary);
     }
 
+    $this->forwardIf($request->isSmartphone(), 'diary', 'smtShow');
+
     $this->form = new DiaryCommentForm();
+  }
+
+  public function executeSmtShow(sfWebRequest $request)
+  {
+    if ($this->diary->getMemberId() !== $this->getUser()->getMemberId())
+    {
+      $this->member = $this->diary->getMember();
+    }
+    else
+    {
+      $this->member = $this->getUser()->getMember();
+    }
+    opSmartphoneLayoutUtil::setLayoutParameters(array('member' => $this->member)); 
+
+    $this->id = $request['id'];
+
+    return sfView::SUCCESS;
   }
 
   public function executeNew(sfWebRequest $request)

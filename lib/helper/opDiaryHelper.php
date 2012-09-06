@@ -75,16 +75,18 @@ function op_api_diary($diary)
 {
   if($diary)
   {
+    $body = nl2br($diary->getBody());
     //todo 本文から文字修飾を取り除く
     //todo 本文からgoogle mapを取り除く
     return array(
       'id'          => $diary->getId(),
       'member'      => op_api_member($diary->getMember()),
       'title'       => $diary->getTitle(),
-      'body'        => op_api_diary_convert_emoji(nl2br(op_truncate($diary->getBody(),60))),
+      'body'        => op_api_diary_convert_emoji($body),
+      'body_short'  => op_api_diary_convert_emoji(op_truncate($body, 60)),
       'public_flag' => $diary->getPublicFlag(),
-      'updated_at'  => op_format_activity_time(strtotime($diary->getUpdatedAt())),
-      'created_at'  => op_format_activity_time(strtotime($diary->getCreatedAt())),
+      'ago'         => op_format_activity_time(strtotime($diary->getCreatedAt())),
+      'created_at'  => $diary->getCreatedAt(),
     );
   }
 }
@@ -94,7 +96,8 @@ function op_api_diary_image($image)
   if($image)
   {
     return array(
-      'filename' => $image->getFile()->getName()
+      'filename' => sf_image_path($image->getFile()->getName()),
+      'imagetag' => image_tag_sf_image($image->getFile()->getName(), array('size' => '120x120'))
     );
   }
 }
@@ -112,13 +115,14 @@ function op_api_diary_comment($comment)
       }
     }
     return array(
-      'id' => $comment->getId(),
-      'diary_id' => $comment->getDiaryId(),
-      'number' => $comment->getNumber(),
-      'member' => op_api_member($comment->getMember()),
-      'body'=> $comment->getBody(),
+      'id'         => $comment->getId(),
+      'diary_id'   => $comment->getDiaryId(),
+      'number'     => $comment->getNumber(),
+      'member'     => op_api_member($comment->getMember()),
+      'body'       => $comment->getBody(),
+      'ago'        => op_format_activity_time(strtotime($comment->getCreatedAt())),
       'created_at' => $comment->getCreatedAt(),
-      'images' => $images
+      'images'     => $images
     );
   }
 }
