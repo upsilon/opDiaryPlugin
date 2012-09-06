@@ -82,6 +82,11 @@ class diaryActions extends opJsonApiActions
     if ($request['id'])
     {
       $query->addWhere('member_id = ?', $request['id']);
+      $query->addWhere('public_flag <= ?', DiaryTable::PUBLIC_FLAG_FRIEND);
+    }
+    else
+    {
+      $query->addWhere('public_flag = ?', DiaryTable::PUBLIC_FLAG_SNS);
     }
 
     $this->diaries = $query->execute();
