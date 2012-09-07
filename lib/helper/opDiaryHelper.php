@@ -119,7 +119,7 @@ function op_api_diary_comment($comment)
       'diary_id'   => $comment->getDiaryId(),
       'number'     => $comment->getNumber(),
       'member'     => op_api_member($comment->getMember()),
-      'body'       => $comment->getBody(),
+      'body'       => nl2br($comment->getBody()),
       'ago'        => op_format_activity_time(strtotime($comment->getCreatedAt())),
       'created_at' => $comment->getCreatedAt(),
       'images'     => $images

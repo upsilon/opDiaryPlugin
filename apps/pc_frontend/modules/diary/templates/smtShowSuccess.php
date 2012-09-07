@@ -154,6 +154,10 @@ $(function(){
           console.log(res);
         }
       )
+    }
+    else
+    {
+      $('#deleteEntryModal').modal('hide');
     };
   })
 
@@ -226,6 +230,10 @@ $(function(){
           $('#deleteCommentModal').attr('data-comment-id', '').modal('hide');
         }
       );
+    }
+    else
+    {
+      $('#deleteCommentModal').attr('data-comment-id', '').modal('hide');
     };
   });
 
