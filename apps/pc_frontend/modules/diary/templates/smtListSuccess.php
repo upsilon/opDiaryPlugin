@@ -16,7 +16,7 @@ else
 <script id="diaryEntry" type="text/x-jquery-tmpl">
 <div class="row entry">
   <div class="span3">
-<a href="${member.profile_url}"><img src="${member.profile_image}" class="rad10" width="57" height="57"></a>
+    <a href="${member.profile_url}"><img src="${member.profile_image}" class="rad10" width="57" height="57"></a>
   </div>
   <div class="span9">
     <div>

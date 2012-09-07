@@ -37,8 +37,16 @@ class diaryComponents extends opDiaryPluginDiaryComponents
     $this->recentDiaryList = Doctrine::getTable('Diary')->getMemberDiaryList($this->member->getId(), 5, $this->getSnsMemberId());
   }
 
-  public function executeSmtDiaryMember()
+  public function executeSmtDiaryMember($request)
   {
+    if ($request->hasParameter('id'))
+    {
+      $this->member = Doctrine::getTable('Member')->find($request->getParameter('id'));
+    }
+    else
+    {
+      $this->member = $this->getUser()->getMember();
+    }
     return sfView::SUCCESS;
   }
 }

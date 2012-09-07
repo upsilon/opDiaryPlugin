@@ -1,18 +1,49 @@
 <?php use_helper('Javascript', 'opUtil', 'opAsset') ?>
+<script id="diaryEntry" type="text/x-jquery-tmpl">
+<div class="row">
+  <div class="span3">${ago}</div>
+  <div class="span9"><a href="/diary/${id}">${title}</a></div>
+</div>
+</script>
+
 <script type="text/javascript">
+$(function(){
+  var params = {
+    apiKey: openpne.apiKey,
+    id: <?php echo $member->getId() ?>,
+    limit: 4
+  }
+
+  $.getJSON(openpne.apiBase + 'diary/list.json',
+    params,
+    function(res){
+      if (res.data.length > 0)
+      {
+        var entry = $('#diaryEntry').tmpl(res.data);
+        $('#diary').append(entry);
+        $('#readmore').show();
+      }
+    }
+  )
+})
 </script>
 
-<script id="" type="text/x-jquery-tmpl">
-</script>
-
+<hr class="toumei" />
 <div class="row">
   <div class="gadget_header span12">日記一覧</div>
 </div>
+<hr class="toumei" />
+<div class="row" id="memberFriendSearchBox">
+  <div class="input-prepend span12">
+    <span class="add-on"><i class="icon-search"></i></span>
+    <input type="text" id="memberFriendSearch" class="realtime-searchbox" value="" />
+  </div>
+</div> 
 
-<div class="diary" style="margin-left: 0px;">
+<div id="diary" style="margin-left: 0px;">
 </div>
 
-<div class="row">
-  <a href="/diary/listMember/<?php echo '1'?>" class="btn span12">もっと読む</a>
+<div class="row hide" id="readmore">
+    <a href="/diary/listMember/<?php echo $member->getId() ?>" class="btn btn-block span11">もっと読む</a>
 </div>
 
