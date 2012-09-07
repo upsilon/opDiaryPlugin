@@ -36,6 +36,8 @@ $t->test()->is($data['data']['public_flag'], $publicFlag, 'should have the same 
 $t->test()->ok($data['data']['created_at'], 'should have the date posted');
 
 $deleteId = $data['data']['id'];
+$json = '';
+$data = array();
 
 $t->info('should be able to delete the entry');
 $json = $t->post('/diary/delete.json',
@@ -46,6 +48,7 @@ $json = $t->post('/diary/delete.json',
   )->getResponse()->getContent()
 ;
 $data = json_decode($json, true);
+var_dump($data, $json);
 $t->test()->is($data['status'], 'success', 'should return status code "success"');
 $t->test()->is($deleteId, $data['data']['id'], 'should have the same id posted');
 

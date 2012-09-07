@@ -1,5 +1,7 @@
 <?php
 use_helper('opAsset');
+op_smt_use_javascript('/opDiaryPlugin/js/bootstrap-modal.js', 'last');
+op_smt_use_javascript('/opDiaryPlugin/js/bootstrap-transition.js', 'last');
 op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
 ?>
 <script id="diaryEntry" type="text/x-jquery-tmpl">
@@ -7,11 +9,15 @@ op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
     <h3 class="gadget_header span12">${$item.formatTitle()}</h3>
   </div>
   <div class="row">
+    {{if editable}}
     <h3 class="span9">${title}</h3>
     <div class="btn-group span3">
       <a href="/diary/edit/${id}" class="btn"><i class="icon-pencil"></i></a>
-      <a href="" class="btn"><i class="icon-remove"></i></a>
+      <a href="javascript:void(0)" class="btn" id="deleteEntry"><i class="icon-remove"></i></a>
     </div>
+    {{else}}
+    <h3 class="span12">${title}</h3>
+    {{/if}}
   </div>
   <div class="row body">
     <div class="span12">{{html body}}</div>
@@ -31,14 +37,14 @@ op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
     <div class="span1">
     &nbsp;
     </div>
-    <textarea id="comment_body"></textarea>
+    <textarea id="commentBody"></textarea>
     <input type="submit" class="btn" id="postComment" value="投稿">
   </div>
   {{tmpl "#diarySiblings"}}
 </script>
 
 <script id="diaryComment" type="text/x-jquery-tmpl">
-  <div class="row">
+  <div class="row" id="comment${id}">
     <div class="span1">
       &nbsp;
     </div>
@@ -53,7 +59,7 @@ op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
       <div class="row">
         <span>${ago}</span>
         {{if deletable}}
-        <a href="#" class="deleteComment"><i class="icon-remove"></i></a>
+        <a href="javascript:void(0);" class="deleteComment" data-comment-id="${id}"><i class="icon-remove"></i></a>
         {{/if}}
       </div>
     </div>
@@ -79,6 +85,7 @@ op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
 
 <script type="text/javascript">
 var diary_id = <?php echo $id ?>;
+
 function getEntry(params)
 {
   params.id = diary_id;
@@ -99,20 +106,63 @@ function getEntry(params)
   );
 }
 
-function toggleSubmitState()
-{
-  $('input[name=submit]').toggle();
+function showModal(modal){
+  var windowHeight = window.outerHeight > $(window).height() ? window.outerHeight : $(window).height();
+  $('.modal-backdrop').css({'position': 'absolute','top': '0', 'height': windowHeight});
+
+  var scrollY = window.scrollY;
+  var viewHeight = window.innerHeight ? window.innerHeight : $(window).height();
+  var modalTop = scrollY + ((viewHeight - modal.height()) / 2 );
+
+  modal.css('top', modalTop);
 }
 
 $(function(){
   getEntry({apiKey: openpne.apiKey});
 
+  $(document).on('click', '#deleteEntry', function(e){
+    $('#deleteEntryModal')
+      .on('shown', function(e) {
+        showModal($(this));
+        return this;
+      })
+      .modal('show');
+
+    e.preventDefault();
+    return false;
+  })
+
+  $('#deleteEntryModal .modal-button').click(function(e){
+    if(e.target.id == 'execute'){
+      var params = {
+        apiKey: openpne.apiKey,
+        id: diary_id,
+      };
+
+      $.post(openpne.apiBase + "diary/delete.json",
+        params,
+        'json'
+      )
+      .success(
+        function(res){
+          console.log(res);
+          window.location = '/diary/listMember/' + res.data.member.id;
+        }
+      )
+      .error(
+        function(res){
+          console.log(res);
+        }
+      )
+    };
+  })
+
   $(document).on('click', '#postComment',function(){
-    toggleSubmitState();
+    $('input[name=submit]').toggle();
     var params = {
       apiKey: openpne.apiKey,
       diary_id: diary_id,
-      body: $('textarea#comment_body').val()
+      body: $('textarea#commentBody').val()
     };
 
     $.post(openpne.apiBase + "diary_comment/post.json",
@@ -122,7 +172,7 @@ $(function(){
     .success(
       function(res){
         $('#comments').append($('#diaryComment').tmpl(res.data));
-        $('textarea#comment_body').val('');
+        $('textarea#commentBody').val('');
       }
     )
     .error(
@@ -132,11 +182,55 @@ $(function(){
     )
     .complete(
       function(res){
-        toggleSubmitState();
+        $('input[name=submit]').toggle();
       }
     );
   })
+
+  $(document).on('click', '.deleteComment',function(e){
+    $('#deleteCommentModal')
+      .attr('data-comment-id', $(this).attr('data-comment-id'))
+      .on('shown', function(e) {
+        showModal($(this));
+        return this;
+      })
+      .modal('show');
+    e.preventDefault();
+
+    return false;
+  });
+
+  $('#deleteCommentModal .modal-button').click(function(e){
+    if(e.target.id == 'execute'){
+      var params = {
+        apiKey: openpne.apiKey,
+        id: $("#deleteCommentModal").attr('data-comment-id'),
+      };
+
+      $.post(openpne.apiBase + "diary_comment/delete.json",
+        params,
+        'json'
+      )
+      .success(
+        function(res){
+          $('#comment'+res.data.id).remove();
+        }
+      )
+      .error(
+        function(res){
+          console.log(res);
+        }
+      )
+      .complete(
+        function(res){
+          $('#deleteCommentModal').attr('data-comment-id', '').modal('hide');
+        }
+      );
+    };
+  });
+
 })
+
 </script>
 <div class="row">
   <div id="show"></div>
@@ -146,4 +240,29 @@ $(function(){
     <?php echo op_image_tag('ajax-loader.gif');?>
   </div>
 </div>
+<!-- Modal -->
+<div class="modal hide" id="deleteCommentModal">
+  <div class="modal-header">
+    <h5>コメントの削除</h5>
+  </div>
+  <div class="modal-body">
+    <p class="center">このコメントを削除してもいいですか？</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn modal-button" id="cancel">キャンセル</button>
+    <button class="btn btn-primary modal-button" id="execute">削除</button>
+  </div>
+</div>
 
+<div class="modal hide" id="deleteEntryModal">
+  <div class="modal-header">
+    <h5>記事の削除</h5>
+  </div>
+  <div class="modal-body">
+    <p class="center">この記事を削除してもいいですか？</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn modal-button" id="cancel">キャンセル</button>
+    <button class="btn btn-primary modal-button" id="execute">削除</button>
+  </div>
+</div>

@@ -34,6 +34,7 @@ class diaryCommentActions extends opJsonApiActions
     $diaryComment->setBody($request['body']);
     $diaryComment->save();
 
+    $this->memberId = $this->getUser()->getMemberId();
     $this->comment = $diaryComment;
   }
 

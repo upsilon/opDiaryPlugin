@@ -75,15 +75,15 @@ function op_api_diary($diary)
 {
   if($diary)
   {
-    $body = nl2br($diary->getBody());
+    $body = $diary->getBody();
     //todo 本文から文字修飾を取り除く
     //todo 本文からgoogle mapを取り除く
     return array(
       'id'          => $diary->getId(),
       'member'      => op_api_member($diary->getMember()),
       'title'       => $diary->getTitle(),
-      'body'        => op_api_diary_convert_emoji($body),
-      'body_short'  => op_api_diary_convert_emoji(op_truncate($body, 60)),
+      'body'        => nl2br(op_api_diary_convert_emoji($body)),
+      'body_short'  => nl2br(op_api_diary_convert_emoji(op_truncate($body, 60))),
       'public_flag' => $diary->getPublicFlag(),
       'ago'         => op_format_activity_time(strtotime($diary->getCreatedAt())),
       'created_at'  => $diary->getCreatedAt(),

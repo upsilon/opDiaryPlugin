@@ -61,7 +61,7 @@ class diaryActions extends opJsonApiActions
 
     if ($isDeleted)
     {
-      $this->id = $request['id'];
+      $this->diary = $diary;
       //TODO アクティビティから日記の投稿を削除する
     }
     else

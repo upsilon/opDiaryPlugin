@@ -17,6 +17,7 @@ if (isset($diary))
   }
   $data['next'] = op_api_diary($diary->getNext($diary->getMemberId()));
   $data['prev'] = op_api_diary($diary->getPrevious($diary->getMemberId()));
+  $data['editable'] = $diary->isAuthor($memberId);
 }
 
 return array(
