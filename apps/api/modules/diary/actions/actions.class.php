@@ -79,9 +79,16 @@ class diaryActions extends opJsonApiActions
       ->orderBy('created_at desc')
       ->offset(($page - 1) * $limit)
       ->limit($limit);
+
+    $relation = null;
     if ($request['id'])
     {
       $query->addWhere('member_id = ?', $request['id']);
+      $relation = Doctrine::getTable('MemberRelationship')->retrieveByFromAndTo($this->member->getId(), $request['id']);
+    }
+
+    if ($relation && $relation->isFriend())
+    {
       $query->addWhere('public_flag <= ?', DiaryTable::PUBLIC_FLAG_FRIEND);
     }
     else
