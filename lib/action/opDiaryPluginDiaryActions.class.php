@@ -78,7 +78,7 @@ class opDiaryPluginDiaryActions extends opDiaryPluginActions
 
   public function executeSmtListMember(sfWebRequest $request)
   {
-    $this->id = $request['id'];
+    $this->id = isset($request['id']) ? $request['id'] : $this->member->getId();
     $this->setTemplate('smtList');
   }
 
