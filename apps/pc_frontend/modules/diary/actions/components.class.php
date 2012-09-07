@@ -36,4 +36,9 @@ class diaryComponents extends opDiaryPluginDiaryComponents
     // Recent Diary List
     $this->recentDiaryList = Doctrine::getTable('Diary')->getMemberDiaryList($this->member->getId(), 5, $this->getSnsMemberId());
   }
+
+  public function executeSmtDiaryMember()
+  {
+    return sfView::SUCCESS;
+  }
 }

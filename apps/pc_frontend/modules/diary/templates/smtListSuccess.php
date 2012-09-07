@@ -46,8 +46,15 @@ function getList(params)
     params,
     function(json)
     {
-      var entry = $('#diaryEntry').tmpl(json.data);
-      $('#list').append(entry);
+      if (json.data.length === 0)
+      {
+        $('#noEntry').show();
+      }
+      else
+      {
+        var entry = $('#diaryEntry').tmpl(json.data);
+        $('#list').append(entry);
+      }
       if (json.next != false)
       {
         $('#loadmore').attr('x-page', json.next).show();
@@ -78,6 +85,9 @@ $(function(){
   <h3 class="gadget_header span12"><?php echo $gadgetTitle; ?></h3>
 </div>
 <div id="list"></div>
+<div class="row hide" id="noEntry">
+  <div class="center span12">まだ日記はありません</div>
+</div>
 <div class="row">
   <div id="loading" class="center">
     <?php echo op_image_tag('ajax-loader.gif');?>
