@@ -103,7 +103,7 @@ class diaryActions extends opJsonApiActions
         $this->next = $page + 1;
       }
     }
-    elseif ($request['format'] == 'normal')
+    else
     {
       $this->forward400If(!isset($request['id']) || '' === (string)$request['id'], 'id is not specified');
 

@@ -49,7 +49,6 @@ $next = $diary->getNext($diary->getMemberId());
 $json = $t->get('/diary/search.json',
     array(
       'apiKey'=>'dummyApiKey',
-      'format'=>'normal',
       'id'    => 1
     )
   )
