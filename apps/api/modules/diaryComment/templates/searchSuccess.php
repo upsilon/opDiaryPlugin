@@ -7,7 +7,9 @@ if (count($comments))
 {
   foreach ($comments as $comment)
   {
-    $data['comments'][] = op_api_diary_comment($comment);
+    $_comment =  op_api_diary_comment($comment);
+    $_comment['deletable'] = $comment->isDeletable($memberId);
+    $data['comments'][] = $_comment;
   }
 }
 

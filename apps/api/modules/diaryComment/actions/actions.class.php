@@ -27,6 +27,7 @@ class diaryCommentActions extends opJsonApiActions
   {
     $this->forward400If('' === (string)$request['diary_id'], 'diary_id parameter is not specified.');
 
+    $this->memberId = $this->getUser()->getMemberId();
     $this->comments = Doctrine::getTable('DiaryComment')->createQuery('q')
                         ->where('diary_id = ?', $request['diary_id'])
                         ->orderBy('created_at')

@@ -25,3 +25,4 @@ $json = $t->get('/diary_comment/search.json',
 $data = json_decode($json, true);
 $t->test()->is($data['status'], 'success', 'should return status code "success"');
 $t->test()->is(count($data['data']['comments']), count($comments), 'should have the same number of comments');
+$t->test()->ok(count($data['data']['comments'][0]['deletable']), 'should have deletable property');
