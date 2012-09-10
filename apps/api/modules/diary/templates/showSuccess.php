@@ -9,8 +9,10 @@ if (isset($diary))
   foreach($images as $image){
     $data['images'][] = op_api_diary_image($image);
   }
-  $data['next'] = $diary->getNext($diary->getMemberId())->getId();
-  $data['prev'] = $diary->getPrevious($diary->getMemberId())->getId();
+  $nextDiary = $diary->getNext($diary->getMemberId());
+  ($nextDiary != false) ? $data['next'] = $nextDiary->getId() : $data['next'] = null;
+  $prevDiary = $diary->getPrevious($diary->getMemberId());
+  ($prevDiary != false) ? $data['prev'] = $prevDiary->getId() : $data['prev'] = null;
   $data['editable'] = $diary->isAuthor($memberId);
 }
 
