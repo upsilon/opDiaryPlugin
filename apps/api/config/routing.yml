@@ -1,7 +1,7 @@
 #diary api routing
 diary_index:
-  url: /diary/list.json
-  param: { module: diary, action: list, sf_format: json }
+  url: /diary/search.json
+  param: { module: diary, action: search, sf_format: json }
   requirements: { sf_method: [get] }
 
 diary_post:

@@ -42,7 +42,7 @@ function getList(params)
     params.id = id;
   }
   $('#loading').show();
-  $.getJSON( openpne.apiBase + 'diary/list.json',
+  $.getJSON( openpne.apiBase + 'diary/search.json',
     params,
     function(json)
     {

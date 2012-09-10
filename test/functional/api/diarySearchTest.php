@@ -12,7 +12,7 @@ $t->login($mailAddress, 'password');
 $t->setCulture('en');
 
 $t->info('should return entries');
-$json = $t->get('/diary/list.json',
+$json = $t->get('/diary/search.json',
     array(
       'apiKey'=>'dummyApiKey'
     )
@@ -25,7 +25,7 @@ $t->test()->is(count($data['data']), 15, 'should return 15 articles');
 $t->test()->is($data['next'], 2, 'should return next page number 2 ');
 
 $t->info('should return next page entries');
-$json = $t->get('/diary/list.json',
+$json = $t->get('/diary/search.json',
     array(
       'apiKey'=>'dummyApiKey',
       'page'=>2

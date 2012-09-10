@@ -14,7 +14,7 @@ $(function(){
     limit: 4
   }
 
-  $.getJSON(openpne.apiBase + 'diary/list.json',
+  $.getJSON(openpne.apiBase + 'diary/search.json',
     params,
     function(res){
       if (res.data.length > 0)

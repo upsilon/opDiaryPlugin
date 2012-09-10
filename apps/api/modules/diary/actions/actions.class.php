@@ -71,7 +71,7 @@ class diaryActions extends opJsonApiActions
 
   }
 
-  public function executeList(sfWebRequest $request)
+  public function executeSearch(sfWebRequest $request)
   {
     $page = isset($request['page']) ? $request['page'] : 1;
     $limit = isset($request['limit']) ? $request['limit'] : sfConfig::get('op_json_api_limit', 15);
