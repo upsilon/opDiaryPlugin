@@ -46,8 +46,6 @@ class diaryActions extends opJsonApiActions
     $diary->save();
 
     $this->diary = $diary;
-
-    //TODO アクティビティに日記の投稿を表示するようにする
   }
 
   public function executeDelete(sfWebRequest $request)
@@ -62,7 +60,6 @@ class diaryActions extends opJsonApiActions
     if ($isDeleted)
     {
       $this->diary = $diary;
-      //TODO アクティビティから日記の投稿を削除する
     }
     else
     {
