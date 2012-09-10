@@ -70,44 +70,48 @@ class diaryActions extends opJsonApiActions
 
   public function executeSearch(sfWebRequest $request)
   {
-    $page = isset($request['page']) ? $request['page'] : 1;
-    $limit = isset($request['limit']) ? $request['limit'] : sfConfig::get('op_json_api_limit', 15);
-    $query = Doctrine::getTable('Diary')->createQuery('c')
-      ->orderBy('created_at desc')
-      ->offset(($page - 1) * $limit)
-      ->limit($limit);
-
-    $relation = null;
-    if ($request['id'])
+    if ($request['format'] == 'mini')
     {
-      $query->addWhere('member_id = ?', $request['id']);
-      $relation = Doctrine::getTable('MemberRelationship')->retrieveByFromAndTo($this->member->getId(), $request['id']);
-    }
+      $page = isset($request['page']) ? $request['page'] : 1;
+      $limit = isset($request['limit']) ? $request['limit'] : sfConfig::get('op_json_api_limit', 15);
+      $query = Doctrine::getTable('Diary')->createQuery('c')
+        ->orderBy('created_at desc')
+        ->offset(($page - 1) * $limit)
+        ->limit($limit);
 
-    if ($relation && $relation->isFriend())
+      $relation = null;
+      if ($request['id'])
+      {
+        $query->addWhere('member_id = ?', $request['id']);
+        $relation = Doctrine::getTable('MemberRelationship')->retrieveByFromAndTo($this->member->getId(), $request['id']);
+      }
+
+      if ($relation && $relation->isFriend())
+      {
+        $query->addWhere('public_flag <= ?', DiaryTable::PUBLIC_FLAG_FRIEND);
+      }
+      else
+      {
+        $query->addWhere('public_flag = ?', DiaryTable::PUBLIC_FLAG_SNS);
+      }
+
+      $this->diaries = $query->execute();
+      $total = $query->count();
+      $this->next = false;
+      if ($total > $page * $limit)
+      {
+        $this->next = $page + 1;
+      }
+    }
+    elseif ($request['format'] == 'normal')
     {
-      $query->addWhere('public_flag <= ?', DiaryTable::PUBLIC_FLAG_FRIEND);
-    }
-    else
-    {
-      $query->addWhere('public_flag = ?', DiaryTable::PUBLIC_FLAG_SNS);
-    }
+      $this->forward400If(!isset($request['id']) || '' === (string)$request['id'], 'id is not specified');
 
-    $this->diaries = $query->execute();
-    $total = $query->count();
-    $this->next = false;
-    if ($total > $page * $limit)
-    {
-      $this->next = $page + 1;
+      $this->memberId = $this->getUser()->getMemberId();
+      $this->diary = Doctrine::getTable('Diary')->findOneById($request['id']);
+    
+      $this->setTemplate('show');
     }
-  }
-
-  public function executeShow(sfWebRequest $request)
-  {
-    $this->forward400If(!isset($request['id']) || '' === (string)$request['id'], 'id is not specified');
-
-    $this->memberId = $this->getUser()->getMemberId();
-    $this->diary = Doctrine::getTable('Diary')->findOneById($request['id']);
   }
 
 }
