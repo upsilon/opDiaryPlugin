@@ -23,6 +23,16 @@ class diaryCommentActions extends opJsonApiActions
     $this->member = $this->getUser()->getMember();
   }
 
+  public function executeSearch(sfWebRequest $request)
+  {
+    $this->forward400If('' === (string)$request['diary_id'], 'diary_id parameter is not specified.');
+
+    $this->comments = Doctrine::getTable('DiaryComment')->createQuery('q')
+                        ->where('diary_id = ?', $request['diary_id'])
+                        ->orderBy('created_at')
+                        ->execute();
+  }
+
   public function executePost(sfWebRequest $request)
   {
     $this->forward400If('' === (string)$request['diary_id'], 'diary_id parameter is not specified.');
