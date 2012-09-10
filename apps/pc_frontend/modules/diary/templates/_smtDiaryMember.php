@@ -33,13 +33,6 @@ $(function(){
   <div class="gadget_header span12">日記一覧</div>
 </div>
 <hr class="toumei" />
-<div class="row" id="memberFriendSearchBox">
-  <div class="input-prepend span12">
-    <span class="add-on"><i class="icon-search"></i></span>
-    <input type="text" id="memberFriendSearch" class="realtime-searchbox" value="" />
-  </div>
-</div> 
-
 <div id="diary" style="margin-left: 0px;">
 </div>
 
