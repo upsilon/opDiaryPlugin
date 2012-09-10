@@ -59,6 +59,11 @@ op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
         <a href="javascript:void(0);" class="deleteComment" data-comment-id="${id}"><i class="icon-remove"></i></a>
         {{/if}}
       </div>
+      <div class="images center">
+        {{each images}}
+          <div class="span2"><a href="${$value.filename}" target="_blank">{{html $value.imagetag}}</a></div>
+        {{/each}}
+      </div>
     </div>
   </div>
 </script>
