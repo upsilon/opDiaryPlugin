@@ -41,6 +41,7 @@ function getList(params)
   {
     params.id = id;
   }
+  params.format = 'mini';
   $('#loading').show();
   $.getJSON( openpne.apiBase + 'diary/search.json',
     params,

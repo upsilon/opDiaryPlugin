@@ -91,8 +91,9 @@ var diary_id = <?php echo $id ?>;
 function getEntry(params)
 {
   params.id = diary_id;
+  params.format = 'normal';
   $('#loading').show();
-  $.getJSON( openpne.apiBase + 'diary/show.json',
+  $.getJSON( openpne.apiBase + 'diary/search.json',
     params,
     function(json)
     {
