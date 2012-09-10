@@ -29,9 +29,6 @@ op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
   </div>
   {{tmpl "#diarySiblings"}}
   <div class="row" id="comments">
-  {{if comments}}
-    {{tmpl(comments) "#diaryComment"}}
-  {{/if}}
   </div>
   <div class="row" id="commentForm">
     <div class="span1">
@@ -70,12 +67,12 @@ op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
   <div class="row siblings">
     <div class="span12 center">
       {{if next}}
-      <a href="/diary/${next.id}" class="btn span5">新しい日記</a>
+      <a href="/diary/${next}" class="btn span5">新しい日記</a>
       {{else}}
       <div class="disabled btn span5">新しい日記</div>
       {{/if}}
       {{if prev}}
-      <a href="/diary/${prev.id}" class="btn span5">古い日記</a>
+      <a href="/diary/${prev}" class="btn span5">古い日記</a>
       {{else}}
       <div class="disabled btn span5">古い日記</div>
       {{/if}}
@@ -101,9 +98,24 @@ function getEntry(params)
         }
       });
       $('#show').html(entry);
-      $('#loading').hide();
+
+      var params = {
+        apiKey: openpne.apiKey,
+        diary_id: diary_id
+      }
+      $.getJSON( openpne.apiBase + 'diary_comment/search.json',
+        params,
+        function(res)
+        {
+          var comments = $('#diaryComment').tmpl(res.data.comments);
+          $('#comments').html(comments);
+          $('#loading').hide();
+        }
+      );
+
     }
   );
+
 }
 
 function showModal(modal){
