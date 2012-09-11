@@ -31,10 +31,28 @@ abstract class PluginDiaryComment extends BaseDiaryComment
       Doctrine::getTable('DiaryCommentUnread')->register($this->Diary);
       Doctrine::getTable('DiaryCommentUpdate')->update($this->Diary, $this->Member);
 
-      $fromMember = Doctrine::getTable('Member')->findOneById($this->member_id);
       sfContext::getInstance()->getConfiguration()->loadHelpers(array('I18N'));
       $message = format_number_choice('[1]1 diary has new comments|(1,Inf]%1% diaries have new comments', array('%1%'=>'1'), 1);
+      $fromMember = Doctrine::getTable('Member')->findOneById($this->member_id);
+
       opNotificationCenter::notify($fromMember, $this->Diary->getMember(), $message, array('category'=>'other', 'url'=>'/diary/'.$this->Diary->getId()));
+
+      $comments = $this->Diary->getDiaryComments();
+      $toMembers = array();
+      foreach($comments as $comment)
+      {
+        if(false == array_key_exists($comment->getMemberId(), $toMembers)
+            && $comment->getMemberId() !== $this->Diary->member_id)
+        {
+          $toMembers[$comment->getMemberId()] = $comment->getMember();
+        }
+      }
+
+      foreach($toMembers as $toMember)
+      {
+        opNotificationCenter::notify($fromMember, $toMember, $message, array('category'=>'other', 'url'=>'/diary/'.$this->Diary->getId()));
+      }
+
     }
   }
 
