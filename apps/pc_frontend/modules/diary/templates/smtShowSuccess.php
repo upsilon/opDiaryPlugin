@@ -162,7 +162,6 @@ $(function(){
       )
       .success(
         function(res){
-          console.log(res);
           window.location = '/diary/listMember/' + res.data.member.id;
         }
       )
