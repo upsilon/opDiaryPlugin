@@ -267,26 +267,26 @@ $(function(){
 <!-- Modal -->
 <div class="modal hide" id="deleteCommentModal">
   <div class="modal-header">
-    <h5>コメントの削除</h5>
+    <h5><?php echo __('Delete the comment');?></h5>
   </div>
   <div class="modal-body">
-    <p class="center">このコメントを削除してもいいですか？</p>
+    <p class="center"><?php echo __('Do you really delete this comment?');?></p>
   </div>
   <div class="modal-footer">
-    <button class="btn modal-button" id="cancel">キャンセル</button>
-    <button class="btn btn-primary modal-button" id="execute">削除</button>
+    <button class="btn modal-button" id="cancel"><?php echo __('Cancel');?></button>
+    <button class="btn btn-primary modal-button" id="execute"><?php echo __('Delete');?></button>
   </div>
 </div>
 
 <div class="modal hide" id="deleteEntryModal">
   <div class="modal-header">
-    <h5>記事の削除</h5>
+    <h5><?php echo __('Delete the diary');?></h5>
   </div>
   <div class="modal-body">
-    <p class="center">この記事を削除してもいいですか？</p>
+    <p class="center"><?php echo __('Do you really delete this diary?');?></p>
   </div>
   <div class="modal-footer">
-    <button class="btn modal-button" id="cancel">キャンセル</button>
-    <button class="btn btn-primary modal-button" id="execute">削除</button>
+    <button class="btn modal-button" id="cancel"><?php echo __('Cancel');?></button>
+    <button class="btn btn-primary modal-button" id="execute"><?php echo __('Delete');?></button>
   </div>
 </div>
