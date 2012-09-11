@@ -38,3 +38,7 @@
 #show #comments .row {
   margin-top: 3px;
 }
+
+#successMessage {
+  margin: 20px;
+}
