@@ -10,6 +10,7 @@
 $(function(){
   var params = {
     apiKey: openpne.apiKey,
+    format: 'mini',
     id: <?php echo $member->getId() ?>,
     limit: 4
   }
