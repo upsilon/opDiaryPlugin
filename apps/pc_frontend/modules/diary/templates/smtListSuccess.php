@@ -72,7 +72,8 @@ function getList(params)
 $(function(){
   getList({apiKey: openpne.apiKey});
 
-  $('#loadmore').click(function(){
+  $('#loadmore').click(function()
+  {
     var params = {
       apiKey: openpne.apiKey,
       page: $(this).attr('x-page')

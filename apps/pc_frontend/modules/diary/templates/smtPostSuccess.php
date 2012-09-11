@@ -55,7 +55,8 @@ function toggleSubmitState()
 $(function(){
   $("#diary_body").opEmoji();
 
-  $("#post_diary").click(function(){
+  $("#post_diary").click(function()
+  {
     $('#successMessage').html('');
     toggleSubmitState();
     var params = getParams();
@@ -65,7 +66,8 @@ $(function(){
       'json'
     )
     .success(
-      function(res){
+      function(res)
+      {
         if (params['id'] == '')
         {
           $('#id').val('');
@@ -78,12 +80,14 @@ $(function(){
       }
     )
     .error(
-      function(res){
+      function(res)
+      {
         console.log(res);
       }
     )
     .complete(
-      function(res){
+      function(res)
+      {
         toggleSubmitState();
       }
     );

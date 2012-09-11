@@ -96,8 +96,10 @@ function getEntry(params)
     params,
     function(json)
     {
-      var entry = $('#diaryEntry').tmpl(json.data, {
-        formatTitle: function(){
+      var entry = $('#diaryEntry').tmpl(json.data,
+      {
+        formatTitle: function()
+        {
           var _date = new Date(this.data.created_at.replace(/-/g,'/'));
           return _date.getMonth() + '月' + _date.getDay() + '日の日記';
         }
@@ -139,7 +141,8 @@ $(function(){
 
   $(document).on('click', '#deleteEntry', function(e){
     $('#deleteEntryModal')
-      .on('shown', function(e) {
+      .on('shown', function(e)
+      {
         showModal($(this));
         return this;
       })
@@ -150,7 +153,8 @@ $(function(){
   })
 
   $('#deleteEntryModal .modal-button').click(function(e){
-    if(e.target.id == 'execute'){
+    if(e.target.id == 'execute')
+    {
       var params = {
         apiKey: openpne.apiKey,
         id: diary_id,
@@ -161,12 +165,14 @@ $(function(){
         'json'
       )
       .success(
-        function(res){
+        function(res)
+        {
           window.location = '/diary/listMember/' + res.data.member.id;
         }
       )
       .error(
-        function(res){
+        function(res)
+        {
           console.log(res);
         }
       )
@@ -190,18 +196,21 @@ $(function(){
       'json'
     )
     .success(
-      function(res){
+      function(res)
+      {
         $('#comments').append($('#diaryComment').tmpl(res.data));
         $('textarea#commentBody').val('');
       }
     )
     .error(
-      function(res){
+      function(res)
+      {
         console.log(res);
       }
     )
     .complete(
-      function(res){
+      function(res)
+      {
         $('input[name=submit]').toggle();
       }
     );
@@ -210,7 +219,8 @@ $(function(){
   $(document).on('click', '.deleteComment',function(e){
     $('#deleteCommentModal')
       .attr('data-comment-id', $(this).attr('data-comment-id'))
-      .on('shown', function(e) {
+      .on('shown', function(e)
+      {
         showModal($(this));
         return this;
       })
@@ -221,7 +231,8 @@ $(function(){
   });
 
   $('#deleteCommentModal .modal-button').click(function(e){
-    if(e.target.id == 'execute'){
+    if(e.target.id == 'execute')
+    {
       var params = {
         apiKey: openpne.apiKey,
         id: $("#deleteCommentModal").attr('data-comment-id'),
@@ -232,17 +243,20 @@ $(function(){
         'json'
       )
       .success(
-        function(res){
+        function(res)
+        {
           $('#comment'+res.data.id).remove();
         }
       )
       .error(
-        function(res){
+        function(res)
+        {
           console.log(res);
         }
       )
       .complete(
-        function(res){
+        function(res)
+        {
           $('#deleteCommentModal').attr('data-comment-id', '').modal('hide');
         }
       );

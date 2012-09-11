@@ -17,7 +17,8 @@ $(function(){
 
   $.getJSON(openpne.apiBase + 'diary/search.json',
     params,
-    function(res){
+    function(res)
+    {
       if (res.data.length > 0)
       {
         var entry = $('#diaryEntry').tmpl(res.data);
