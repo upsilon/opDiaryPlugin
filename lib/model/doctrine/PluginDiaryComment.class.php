@@ -37,17 +37,19 @@ abstract class PluginDiaryComment extends BaseDiaryComment
 
       opNotificationCenter::notify($fromMember, $this->Diary->getMember(), $message, array('category'=>'other', 'url'=>'/diary/'.$this->Diary->getId()));
 
+      //同じ日記エントリにコメントをしている人に通知を飛ばす
       $comments = $this->Diary->getDiaryComments();
       $toMembers = array();
       foreach($comments as $comment)
       {
         if(false == array_key_exists($comment->getMemberId(), $toMembers)
-            && $comment->getMemberId() !== $this->Diary->member_id)
+          && $comment->getMemberId() !== $this->Diary->member_id
+          && $comment->getMemberId() !== $this->member_id
+        )
         {
           $toMembers[$comment->getMemberId()] = $comment->getMember();
         }
       }
-
       foreach($toMembers as $toMember)
       {
         opNotificationCenter::notify($fromMember, $toMember, $message, array('category'=>'other', 'url'=>'/diary/'.$this->Diary->getId()));

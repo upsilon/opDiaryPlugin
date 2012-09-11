@@ -96,6 +96,6 @@ $(function(){
   </div>
 </div>
 <div class="row">
-  <button class="span12 btn small hide" id="loadmore">もっと読む</button>
+  <button class="span12 btn small hide" id="loadmore"><?php echo __('More'); ?></button>
 </div>
 

@@ -15,12 +15,13 @@ else
   $diaryBody  = '';
   $publicFlag = 1;
 }
+use_helper('opAsset');
+op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
+op_smt_use_javascript('jquery-ui.min.js', 'last');
+op_smt_use_javascript('op_emoji.js', 'last');
+op_smt_use_javascript('Selection.js', 'last');
+op_smt_use_javascript('decoration.js', 'last');
 ?>
-<?php use_helper('opAsset');?>
-<?php op_smt_use_javascript('jquery-ui.min.js', 'last'); ?>
-<?php op_smt_use_javascript('op_emoji.js', 'last'); ?>
-<?php op_smt_use_javascript('Selection.js', 'last'); ?>
-<?php op_smt_use_javascript('decoration.js', 'last'); ?>
 
 <script id="successMessageTemplate" type="text/x-jquery-tmpl">
     投稿しました<br/>
@@ -120,6 +121,7 @@ $(function(){
       <input type="submit" name="submit" value="<?php echo __('Post') ?>" id="post_diary" class="btn btn-primary span12" />
     </div>
   </div>
+  <hr class="toumei">
   <div id="loading" class="center hide">
     <?php echo op_image_tag('ajax-loader.gif');?>
   </div>
