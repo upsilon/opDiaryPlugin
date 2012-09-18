@@ -34,6 +34,7 @@ class diaryActions extends opJsonApiActions
     if(isset($request['id']) && '' !== $request['id'])
     {
       $diary = Doctrine::getTable('Diary')->findOneById($request['id']);
+      $this->forward400If(false === $diary, 'the specified diary does not exit.');
     }
     else
     {

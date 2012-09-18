@@ -210,3 +210,17 @@ $json = $t->get('/diary/search.json',
   ->end()
 ;
 
+$t->info('存在しない日記の編集');
+$json = $t->post('/diary/post.json',
+array(
+'id' => '0',
+'apiKey' => 'dummyApiKey',
+'title' => '日記タイトル',
+'body' => '日記本文',
+'public_flag' => 'PluginDiaryTable::PUBLIC_FLAG_FRIEND',
+)
+  )->with('response')->begin()
+    ->isStatusCode(400)
+  ->end()
+;
+
