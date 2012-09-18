@@ -101,7 +101,7 @@ function getEntry(params)
         formatTitle: function()
         {
           var _date = new Date(this.data.created_at.replace(/-/g,'/'));
-          return _date.getMonth() + '月' + _date.getDay() + '日の日記';
+          return _date.getMonth()+1 + '月' + _date.getDate() + '日の日記';
         }
       });
       $('#show').html(entry);
