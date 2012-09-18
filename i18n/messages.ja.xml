@@ -246,6 +246,10 @@
         <source>Please input 0 or greater.</source>
         <target>0以上の数字を入力してください。</target>
       </trans-unit>
+      <trans-unit id="68">
+        <source>Cancel</source>
+        <target>キャンセル</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
