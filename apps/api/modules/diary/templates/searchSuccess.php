@@ -1,5 +1,5 @@
 <?php
-use_helper('opDiary');
+use_helper('opDiary', 'I18N');
 
 $data = array();
 

@@ -41,4 +41,3 @@ $(function(){
 <div class="row hide" id="readmore">
 <a href="/diary/listMember/<?php echo $member->getId() ?>" class="btn btn-block span11"><?php echo __('More')?></a>
 </div>
-
