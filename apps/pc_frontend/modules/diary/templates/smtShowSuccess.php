@@ -6,7 +6,7 @@ op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
 ?>
 <script id="diaryEntry" type="text/x-jquery-tmpl">
   <div class="row">
-    <h3 class="gadget_header span12">${$item.formatTitle()}</h3>
+    <div class="gadget_header span12">${$item.formatTitle()}</div>
   </div>
   <div class="row">
     {{if editable}}

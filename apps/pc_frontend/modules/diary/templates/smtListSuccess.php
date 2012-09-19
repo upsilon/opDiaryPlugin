@@ -84,7 +84,7 @@ $(function(){
 </script>
 
 <div class="row">
-  <h3 class="gadget_header span12"><?php echo $gadgetTitle; ?></h3>
+  <div class="gadget_header span12"><?php echo $gadgetTitle; ?></div>
 </div>
 <div id="list"></div>
 <div class="row hide" id="noEntry">
