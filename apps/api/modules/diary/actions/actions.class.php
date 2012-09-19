@@ -35,12 +35,13 @@ class diaryActions extends opJsonApiActions
     {
       $diary = Doctrine::getTable('Diary')->findOneById($request['id']);
       $this->forward400If(false === $diary, 'the specified diary does not exit.');
+      $this->forward400If(false === $diary->isAuthor($this->member->getId()), 'this diary is not yours.');
     }
     else
     {
       $diary = new Diary();
+      $diary->setMemberId($this->member->getId());
     }
-    $diary->setMemberId($this->member->getId());
     $diary->setTitle($request['title']);
     $diary->setBody($request['body']);
     $diary->setPublicFlag($request['public_flag']);

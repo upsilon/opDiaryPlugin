@@ -223,4 +223,18 @@ array(
     ->isStatusCode(400)
   ->end()
 ;
-
+$t->info('自分以外の日記の編集');
+$diary = Doctrine::getTable('Diary')->findOneByMemberId(5);
+$json = $t->post('/diary/post.json',
+array(
+'id' => $diary->getId(),
+'apiKey' => 'dummyApiKey',
+'title' => '日記タイトル',
+'body' => '日記本文',
+'public_flag' => 'PluginDiaryTable::PUBLIC_FLAG_FRIEND',
+)
+)
+->with('response')->begin()
+->isStatusCode('400')
+->end()
+;
