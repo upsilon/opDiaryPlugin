@@ -75,9 +75,8 @@ function op_api_diary($diary)
 {
   if($diary)
   {
-    $body = $diary->getBody();
-    //todo 本文から文字修飾を取り除く
-    //todo 本文からgoogle mapを取り除く
+    $body = preg_replace(array('/&lt;op:.?&gt;/', '/&lt;\/op:.?&gt;/'), '', $diary->getBody());
+    $body = preg_replace('/http.:\/\/maps\.google\.co[[:graph:]]*/', '', $body);
     return array(
       'id'          => $diary->getId(),
       'member'      => op_api_member($diary->getMember()),
