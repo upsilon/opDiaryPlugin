@@ -16,9 +16,9 @@ $diary = Doctrine::getTable('Diary')->findOneByMemberId(1);
 $body = 'コメントテスト本文';
 $json = $t->post('/diary_comment/post.json',
     array(
-      'apiKey'      => 'dummyApiKey',
-      'diary_id'       => $diary->getId(),
-      'body'        => $body,
+      'apiKey'   => 'dummyApiKey',
+      'diary_id' => $diary->getId(),
+      'body'     => $body,
     )
   )->getResponse()->getContent()
 ;
@@ -36,9 +36,9 @@ $diary = Doctrine::getTable('Diary')->findOneByMemberId(1);
 $body = '';
 $json = $t->post('/diary_comment/post.json',
     array(
-      'apiKey'      => 'dummyApiKey',
-      'diary_id'       => $diary->getId(),
-      'body'        => $body,
+      'apiKey'   => 'dummyApiKey',
+      'diary_id' => $diary->getId(),
+      'body'     => $body,
     )
   )
   ->with('response')->begin()
@@ -48,11 +48,24 @@ $json = $t->post('/diary_comment/post.json',
 
 $json = $t->post('/diary_comment/post.json',
     array(
-      'apiKey'      => 'dummyApiKey',
-      'diary_id'       => $diary->getId(),
+      'apiKey'   => 'dummyApiKey',
+      'diary_id' => $diary->getId(),
     )
   )
   ->with('response')->begin()
     ->isStatusCode(400)
   ->end()
+;
+
+$t->info('存在しない日記にコメント');
+$json = $t->post('/diary_comment/post.json',
+array(
+'apiKey' => 'dummyApiKey',
+'diary_id' => 0,
+'body' => 'コメント本文',
+)
+)
+->with('response')->begin()
+->isStatusCode('400')
+->end()
 ;

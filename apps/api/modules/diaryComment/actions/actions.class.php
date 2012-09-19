@@ -39,6 +39,10 @@ class diaryCommentActions extends opJsonApiActions
     $this->forward400If('' === (string)$request['diary_id'], 'diary_id parameter is not specified.');
     $this->forward400If('' === (string)$request['body'], 'body parameter is not specified.');
 
+    $diary = Doctrine::getTable('Diary')->findOneById($request['diary_id']);
+    $this->forward400If(false === $diary, 'the specified diary does not exist');
+
+
     $diaryComment = new DiaryComment();
     $diaryComment->setMemberId($this->member->getId());
     $diaryComment->setDiaryId($request['diary_id']);
