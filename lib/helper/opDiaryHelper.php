@@ -77,6 +77,7 @@ function op_api_diary($diary)
   {
     $body = preg_replace(array('/&lt;op:.?&gt;/', '/&lt;\/op:.?&gt;/'), '', $diary->getBody());
     $body = preg_replace('/http.:\/\/maps\.google\.co[[:graph:]]*/', '', $body);
+    $body = op_auto_link_text($body);
     return array(
       'id'          => $diary->getId(),
       'member'      => op_api_member($diary->getMember()),
