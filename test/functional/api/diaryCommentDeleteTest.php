@@ -42,3 +42,15 @@ $json = $t->post('/diary_comment/delete.json',
     ->isStatusCode(400)
   ->end()
 ;
+
+$t->info('存在しないコメントの削除');
+$json = $t->post('/diary_comment/delete.json',
+array(
+'apiKey' => 'dummyApiKey',
+'id' => '0',
+)
+)
+->with('response')->begin()
+->isStatusCode('400')
+->end()
+;

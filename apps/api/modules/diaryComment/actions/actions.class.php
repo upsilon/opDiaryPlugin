@@ -60,6 +60,7 @@ class diaryCommentActions extends opJsonApiActions
 
     $comment = Doctrine::getTable('DiaryComment')->findOneById($id);
 
+    $this->forward400If(false === $comment, 'the comment does not exist. id:'.$id);
     $this->forward400If(false === $comment->isDeletable($this->member->getId()), 'you can not delete this comment. id:'.$id);
 
     $isDeleted = $comment->delete();
