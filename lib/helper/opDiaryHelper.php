@@ -77,13 +77,14 @@ function op_api_diary($diary)
   {
     $body = preg_replace(array('/&lt;op:.*?&gt;/', '/&lt;\/op:.*?&gt;/'), '', $diary->getBody());
     $body = preg_replace('/http.:\/\/maps\.google\.co[[:graph:]]*/', '', $body);
+    $bodyShort = op_truncate($body, 60);
     $body = op_auto_link_text($body);
     return array(
       'id'          => $diary->getId(),
       'member'      => op_api_member($diary->getMember()),
       'title'       => $diary->getTitle(),
       'body'        => nl2br(op_api_diary_convert_emoji($body)),
-      'body_short'  => nl2br(op_api_diary_convert_emoji(op_truncate($body, 60))),
+      'body_short'  => nl2br(op_api_diary_convert_emoji($bodyShort)),
       'public_flag' => $diary->getPublicFlag(),
       'ago'         => op_format_activity_time(strtotime($diary->getCreatedAt())),
       'created_at'  => $diary->getCreatedAt(),
