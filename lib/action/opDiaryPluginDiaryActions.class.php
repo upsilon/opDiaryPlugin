@@ -131,6 +131,7 @@ class opDiaryPluginDiaryActions extends opDiaryPluginActions
 
   public function executeSmtNew(sfWebRequest $request)
   {
+    $this->diary = null;
     $this->smtPost($request);
   }
 

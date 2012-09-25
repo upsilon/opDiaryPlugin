@@ -25,7 +25,7 @@ op_smt_use_javascript('decoration.js', 'last');
 
 <script id="successMessageTemplate" type="text/x-jquery-tmpl">
     投稿しました<br/>
-    <a href="/diary/${id}">日記を見る</a>
+    <a href="<?php echo public_path('diary') ?>/${id}">日記を見る</a>
 </script>
 
 <script type="text/javascript">
