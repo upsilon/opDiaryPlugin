@@ -22,7 +22,7 @@ else
     <div>
       <span class="title">${title}</span>
       {{html body_short}}
-      <a href="<?php echo public_path('diary') ?>/${id}" class="readmore">続き</a>
+      <a href="/diary/${id}" class="readmore">続き</a>
     </div>
     <div class="clearfix"></div>
     <div class="row">

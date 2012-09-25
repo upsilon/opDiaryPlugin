@@ -2,7 +2,7 @@
 <script id="diaryEntry" type="text/x-jquery-tmpl">
 <div class="row">
   <div class="span3">${ago}</div>
-  <div class="span9"><a href="<?php echo public_path('diary') ?>/${id}">${title}</a></div>
+  <div class="span9"><a href="/diary/${id}">${title}</a></div>
 </div>
 </script>
 
@@ -39,5 +39,5 @@ $(function(){
 </div>
 
 <div class="row hide" id="readmore">
-<a href="<?php echo public_path('diary/listMember').'/'.$member->getId() ?>" class="btn btn-block span11"><?php echo __('More')?></a>
+<a href="/diary/listMember/<?php echo $member->getId() ?>" class="btn btn-block span11"><?php echo __('More')?></a>
 </div>

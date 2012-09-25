@@ -12,7 +12,7 @@ op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
     {{if editable}}
     <h3 class="span9">${title}</h3>
     <div class="btn-group span3">
-      <a href="<?php echo public_path('diary/edit'); ?>/${id}" class="btn"><i class="icon-pencil"></i></a>
+      <a href="/diary/edit/${id}" class="btn"><i class="icon-pencil"></i></a>
       <a href="javascript:void(0)" class="btn" id="deleteEntry"><i class="icon-remove"></i></a>
     </div>
     {{else}}
@@ -72,12 +72,12 @@ op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
   <div class="row siblings">
     <div class="span12 center">
       {{if next}}
-      <a href="<?php echo public_path('diary') ?>/${next}" class="btn span5">新しい日記</a>
+      <a href="/diary/${next}" class="btn span5">新しい日記</a>
       {{else}}
       <div class="disabled btn span5">新しい日記</div>
       {{/if}}
       {{if prev}}
-      <a href="<?php echo public_path('diary') ?>/${prev}" class="btn span5">古い日記</a>
+      <a href="/diary/${prev}" class="btn span5">古い日記</a>
       {{else}}
       <div class="disabled btn span5">古い日記</div>
       {{/if}}
