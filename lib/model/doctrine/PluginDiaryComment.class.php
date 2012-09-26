@@ -36,7 +36,7 @@ abstract class PluginDiaryComment extends BaseDiaryComment
       Doctrine::getTable('DiaryCommentUpdate')->update($this->Diary, $this->Member);
 
 
-      opNotificationCenter::notify($fromMember, $this->Diary->getMember(), $message, array('category'=>'other', 'url'=>'/diary/'.$this->Diary->getId()));
+      opNotificationCenter::notify($fromMember, $this->Diary->getMember(), $message, array('category'=>'other', 'url'=>'/diary/'.$this->Diary->getId(), 'icon_url'=>null));
     }
 
     //同じ日記エントリにコメントをしている人に通知を飛ばす
@@ -54,7 +54,7 @@ abstract class PluginDiaryComment extends BaseDiaryComment
     }
     foreach($toMembers as $toMember)
     {
-      opNotificationCenter::notify($fromMember, $toMember, $message, array('category'=>'other', 'url'=>'/diary/'.$this->Diary->getId()));
+      opNotificationCenter::notify($fromMember, $toMember, $message, array('category'=>'other', 'url'=>'/diary/'.$this->Diary->getId(), 'icon_url'=>null));
     }
 
   }
