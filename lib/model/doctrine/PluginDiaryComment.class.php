@@ -26,8 +26,7 @@ abstract class PluginDiaryComment extends BaseDiaryComment
 
   public function postSave($event)
   {
-    sfApplicationConfiguration::getActive()->loadHelpers(array('Url'));
-    sfContext::getInstance()->getConfiguration()->loadHelpers(array('I18N'));
+    sfApplicationConfiguration::getActive()->loadHelpers(array('Url', 'I18N'));
     $message = format_number_choice('[1]1 diary has new comments|(1,Inf]%1% diaries have new comments', array('%1%'=>'1'), 1);
     $fromMember = Doctrine::getTable('Member')->findOneById($this->member_id);
 
