@@ -81,20 +81,26 @@ class diaryActions extends opJsonApiActions
         ->offset(($page - 1) * $limit)
         ->limit($limit);
 
-      $relation = null;
       if ($request['id'])
       {
         $query->addWhere('member_id = ?', $request['id']);
-        $relation = Doctrine::getTable('MemberRelationship')->retrieveByFromAndTo($this->member->getId(), $request['id']);
-      }
-
-      if ($relation && $relation->isFriend())
-      {
-        $query->addWhere('public_flag <= ?', DiaryTable::PUBLIC_FLAG_FRIEND);
-      }
-      else
-      {
-        $query->addWhere('public_flag = ?', DiaryTable::PUBLIC_FLAG_SNS);
+        if ($request['id'] == $this->getUser()->getMemberId())
+        {
+          $query->addWhere('public_flag <= ?', DiaryTable::PUBLIC_FLAG_PRIVATE);
+        }
+        else
+        {
+          $relation = null;
+          $relation = Doctrine::getTable('MemberRelationship')->retrieveByFromAndTo($this->member->getId(), $request['id']);
+          if ($relation && $relation->isFriend())
+          {
+            $query->addWhere('public_flag <= ?', DiaryTable::PUBLIC_FLAG_FRIEND);
+          }
+          else
+          {
+            $query->addWhere('public_flag = ?', DiaryTable::PUBLIC_FLAG_SNS);
+          }
+        }
       }
 
       $this->diaries = $query->execute();
