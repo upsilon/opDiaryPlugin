@@ -26,9 +26,6 @@ abstract class PluginDiaryComment extends BaseDiaryComment
 
   public function postSave($event)
   {
-    $rootPath = sfContext::getInstance()->getRequest()->getRelativeUrlRoot();
-    sfApplicationConfiguration::getActive()->loadHelpers(array('I18N'));
-    $message = format_number_choice('[1]1 diary has new comments|(1,Inf]%1% diaries have new comments', array('%1%'=>'1'), 1);
     $fromMember = Doctrine::getTable('Member')->findOneById($this->member_id);
 
     if ($this->member_id !== $this->Diary->member_id)
@@ -36,8 +33,7 @@ abstract class PluginDiaryComment extends BaseDiaryComment
       Doctrine::getTable('DiaryCommentUnread')->register($this->Diary);
       Doctrine::getTable('DiaryCommentUpdate')->update($this->Diary, $this->Member);
 
-
-      opNotificationCenter::notify($fromMember, $this->Diary->getMember(), $message, array('category'=>'other', 'url'=>$rootPath.'/diary/'.$this->Diary->getId(), 'icon_url'=>null));
+      opDiaryPluginUtil::sendNotification($fromMember, $this->Diary->getMember(), $this->Diary->getId());
     }
 
     //同じ日記エントリにコメントをしている人に通知を飛ばす
@@ -55,7 +51,7 @@ abstract class PluginDiaryComment extends BaseDiaryComment
     }
     foreach($toMembers as $toMember)
     {
-      opNotificationCenter::notify($fromMember, $toMember, $message, array('category'=>'other', 'url'=>$rootPath.'/diary/'.$this->Diary->getId(), 'icon_url'=>null));
+      opDiaryPluginUtil::sendNotification($fromMember, $toMember, $this->Diary->getId());
     }
 
   }
