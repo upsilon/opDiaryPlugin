@@ -102,6 +102,10 @@ class diaryActions extends opJsonApiActions
           }
         }
       }
+      else
+      {
+        $query->addWhere('public_flag = ?', DiaryTable::PUBLIC_FLAG_SNS);
+      }
 
       $this->diaries = $query->execute();
       $total = $query->count();
