@@ -7,7 +7,11 @@
 
 <ul class="articleList">
 <?php foreach ($diaryList as $diary): ?>
-<li><span class="date"><?php echo op_format_date($diary->created_at, 'XShortDateJa') ?></span><?php echo op_diary_link_to_show($diary) ?></li>
+<li><span class="date"><?php echo op_format_date($diary->created_at, 'XShortDateJa') ?></span><?php echo op_diary_link_to_show($diary) ?>
+<!-- Like Plugin -->
+<?php echo link_to('<i class="icon-thumbs-up"></i><span class="like-list" data-like-id="' . $diary->getId() . '" data-like-target="D">いいね！</span>', op_diary_url_for_show($diary)) ?>
+
+</li>
 <?php endforeach; ?>
 </ul>
 

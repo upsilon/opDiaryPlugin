@@ -36,6 +36,17 @@
 <?php endif; ?>
 <?php echo op_url_cmd(op_decoration(nl2br($diary->body))) ?>
 </div>
+<!--Like Plugin -->
+<div>
+<span class="like-wrapper hide">
+<a><span class="like-list" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D">いいね！</span></a>
+<a><span class="like-cancel" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D" style="display: none;">いいね！を取り消す&nbsp;</span></a>
+<?php if ($diary->member_id !== $myMemberId): ?>
+<a><span class="like-post" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D" member-id="<?php echo $diary->member_id ?>"><i class="icon-thumbs-up"></i>&nbsp;&nbsp;</span></a>
+<?php endif; ?>
+  <div class="like-list-member" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D"></div>
+</span>
+</div>
 </dd>
 </dl>
 <?php if ($diary->member_id === $myMemberId): ?>

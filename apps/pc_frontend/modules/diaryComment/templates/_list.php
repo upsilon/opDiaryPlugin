@@ -55,6 +55,17 @@
 <?php echo op_url_cmd(nl2br($comment->body)) ?>
 </p>
 </div>
+<!--Like Plugin -->
+<div>
+<span class="like-wrapper hide">
+<a><span class="like-list" data-like-id="<?php echo $comment->getId() ?>" data-like-target="d">いいね！</span></a>
+<a><span class="like-cancel" data-like-id="<?php echo $comment->getId() ?>" data-like-target="d" style="display: none;">いいね！を取り消す&nbsp;</span></a>
+<?php if ($comment->member_id !== $sf_user->getMemberId()): ?>
+<a><span class="like-post" data-like-id="<?php echo $comment->getId() ?>" data-like-target="d" member-id="<?php echo $comment->member_id ?>"><i class="icon-thumbs-up"></i>&nbsp;&nbsp;</span></a>
+<?php endif; ?>
+  <div class="like-list-member" data-like-id="<?php echo $comment->getId() ?>" data-like-target="d"></div>
+</span>
+</div>
 </dd>
 </dl>
 <?php endforeach; ?>
