@@ -47,6 +47,14 @@ MemberConfig:
     name: "api_key"
     value: "dummyApiKey"
     Member: member1
+  member_2_api_key:
+    name: "api_key"
+    value: "dummyApiKey2"
+    Member: member2
+  member_5_api_key:
+    name: "api_key"
+    value: "dummyApiKey5"
+    Member: member5
 
 MemberRelationship:
   member_relationship_1_from_2:
