@@ -2,7 +2,15 @@
 <script id="diaryEntry" type="text/x-jquery-tmpl">
 <div class="row">
   <div class="span3">${ago}</div>
-  <div class="span9"><a href="<?php echo public_path('diary') ?>/${id}">${title}</a></div>
+  <div class="span9"><a href="<?php echo public_path('diary') ?>/${id}">${title}</a>
+    <!-- Like Plugin -->
+    <span class="like-wrapper" style="display: none;">
+      <a href="<?php echo public_path('diary') ?>/${id}">
+        <i class="icon-thumbs-up"></i>
+        <span class="like-list" data-like-id="${id}" data-like-target="D" no-href-clear="ture">いいね！</span>
+      </a>
+    </span>
+  </div>
 </div>
 </script>
 
