@@ -40,11 +40,12 @@
 <div class="like" style="display: none;">
 <span class="like-wrapper">
 <?php if ($diary->member_id !== $myMemberId): ?>
-<a><span class="like-post" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D" member-id="<?php echo $diary->member_id ?>"><i class="icon-thumbs-up"></i>&nbsp;&nbsp;</span></a>
+<a><span class="like-post" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D" member-id="<?php echo $diary->member_id ?>">いいね！</span></a>
 <?php endif; ?>
 <a><span class="like-cancel" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D" style="display: none;">いいね！を取り消す&nbsp;</span></a>
-<a><span class="like-list" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D">いいね！</span></a>
+<a><span class="like-list" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D"></span></a><span></span>
 <div class="like-list-member" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D"></div>
+<span class="like-friend-list" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D"></span>
 </span>
 </div>
 </dd>
