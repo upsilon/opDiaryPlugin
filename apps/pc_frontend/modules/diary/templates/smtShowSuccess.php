@@ -30,10 +30,14 @@ op_smt_use_stylesheet('/opLikePlugin/css/like-smartphone.css', 'last');
     {{/each}}
   </div>
   <!-- Like Plugin -->
-  <div class="row like-wrapper" style="display: none;">
-    {{if member.self==false}}<a><span class="like-post" data-like-id="${id}" data-like-target="D" member-id="${member.id}"><i class="icon-thumbs-up"></i>&nbsp;&nbsp;&nbsp;</span></a>{{/if}}
-    <a><span class="like-cancel" data-like-id="${id}" data-like-target="D" style="display: none;">いいね！を取り消す&nbsp;</span></a>
-    <a><span class="like-list" data-like-id="${id}" data-like-target="D">いいね！</span></a>
+  <div class="row like-wrapper" data-like-id="${id}" data-like-target="D" member-id="${member.id}">
+    <span class="span6"> 
+      <a class="like-post">いいね！</a>
+      <a class="like-cancel">いいね！を取り消す</a>
+    </span>
+    <span class="span6">
+      <a class="like-list"></a>
+    </span>
   </div>
   {{tmpl "#diarySiblings"}}
   <div class="row" id="comments">
@@ -69,14 +73,18 @@ op_smt_use_stylesheet('/opLikePlugin/css/like-smartphone.css', 'last');
       </div>
       <div class="images center">
         {{each images}}
-          <div class="span2"><a href="${$value.filename}" target="_blank">{{html $value.imagetag}}</a></div>
+          <div class="span3"><a href="${$value.filename}" target="_blank">{{html $value.imagetag}}</a></div>
         {{/each}}
       </div>
       <!-- Like Plugin -->
-      <div class="row like-wrapper" style="display: none;">
-        {{if member.self==false}}<a><span class="like-post" data-like-id="${id}" data-like-target="d" member-id="${member.id}"><i class="icon-thumbs-up"></i>&nbsp;&nbsp;&nbsp;</span></a>{{/if}}
-        <a><span class="like-cancel" data-like-id="${id}" data-like-target="d" style="display: none;">いいね！を取り消す&nbsp;</span></a>
-        <a><span class="like-list" data-like-id="${id}" data-like-target="d">いいね！</span></a>
+      <div class="row like-wrapper" data-like-id="${id}" data-like-target="d" member-id="${member.id}">
+        <span class="span5"> 
+          <a class="like-post">いいね！</a>
+          <a class="like-cancel">いいね！を取り消す</a>
+        </span>
+        <span class="span2">
+          <a class="like-list"></a>
+        </span>
       </div>
     </div>
   </div>

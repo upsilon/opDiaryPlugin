@@ -38,14 +38,13 @@
 </div>
 <!--Like Plugin -->
 <div class="like" style="display: none;">
-<span class="like-wrapper">
-<?php if ($diary->member_id !== $myMemberId): ?>
-<a><span class="like-post" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D" member-id="<?php echo $diary->member_id ?>">いいね！</span></a>
-<?php endif; ?>
-<a><span class="like-cancel" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D" style="display: none;">いいね！を取り消す&nbsp;</span></a>
-<a><span class="like-list" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D"></span></a><span></span>
-<div class="like-list-member" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D"></div>
-<span class="like-friend-list" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D"></span>
+<span class="like-wrapper" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D" member-id="<?php echo $diary->member_id ?>">
+<span class="like-post">いいね！</span>
+<span class="like-cancel">いいね！を取り消す&nbsp;</span>
+<span class="like-you">あなたが「いいね！」と言っています。</span><br />
+<a class="like-list" href="#likeModal" data-toggle="modal"></a>
+<div class="like-list-member"></div>
+<span class="like-friend-list"></span>
 </span>
 </div>
 </dd>

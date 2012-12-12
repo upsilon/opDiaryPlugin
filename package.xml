@@ -31,19 +31,19 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2012-12-06</date>
- <time>11:53:22</time>
+ <date>2012-12-12</date>
+ <time>19:42:16</time>
  <version>
   <release>1.4.2</release>
   <api>1.4.2</api>
  </version>
  <stability>
-  <release>devel</release>
-  <api>devel</api>
+  <release>beta</release>
+  <api>beta</api>
  </stability>
  <license>apache</license>
  <notes>
-devel release.
+beta release.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -119,26 +119,26 @@ devel release.
    <file baseinstalldir="/" md5sum="9c7ba3134f30a09793733e785a5deead" name="apps/pc_frontend/modules/diary/templates/listMemberSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="fe73aed219956513070d976158938462" name="apps/pc_frontend/modules/diary/templates/listSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="a5e548d3ff8807b5ea3459b26879644c" name="apps/pc_frontend/modules/diary/templates/newSuccess.php" role="data" />
-   <file baseinstalldir="/" md5sum="c11fa9a7f028679350acbda890dc5811" name="apps/pc_frontend/modules/diary/templates/showSuccess.php" role="data" />
+   <file baseinstalldir="/" md5sum="35d01b5a8e7a0e25e494f130a7fbb546" name="apps/pc_frontend/modules/diary/templates/showSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="65a88fa0af4ac8c61d97364116bb5dac" name="apps/pc_frontend/modules/diary/templates/smtListSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="fd83507211f6747dbbdddf6c119a97ff" name="apps/pc_frontend/modules/diary/templates/smtPostSuccess.php" role="data" />
-   <file baseinstalldir="/" md5sum="718433ee0455185ac045219d205ee9dc" name="apps/pc_frontend/modules/diary/templates/smtShowSuccess.php" role="data" />
+   <file baseinstalldir="/" md5sum="fbf8e58064dbea2a491f3d2679f9081b" name="apps/pc_frontend/modules/diary/templates/smtShowSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="edee856bbf8c4fafec721562e960cb2b" name="apps/pc_frontend/modules/diary/templates/_cautionUnreadDiaryComment.php" role="data" />
-   <file baseinstalldir="/" md5sum="e5328e17568aa39242ef9003fdc04995" name="apps/pc_frontend/modules/diary/templates/_diaryList.php" role="data" />
+   <file baseinstalldir="/" md5sum="32857468f71792f8ac1c4fcfb4b93303" name="apps/pc_frontend/modules/diary/templates/_diaryList.php" role="data" />
    <file baseinstalldir="/" md5sum="b102ea1f7a86793e9d38cfc1f7943d0e" name="apps/pc_frontend/modules/diary/templates/_form.php" role="data" />
    <file baseinstalldir="/" md5sum="cad8124fc21e57b87a874ff3554d9544" name="apps/pc_frontend/modules/diary/templates/_formEditImage.php" role="data" />
-   <file baseinstalldir="/" md5sum="d9fdbb8a43d0c6090bba85e7adbdaa3d" name="apps/pc_frontend/modules/diary/templates/_friendDiaryList.php" role="data" />
-   <file baseinstalldir="/" md5sum="22a38d2195d63e95f708c7599a06ee21" name="apps/pc_frontend/modules/diary/templates/_memberDiaryList.php" role="data" />
-   <file baseinstalldir="/" md5sum="e3d2d89adc2cf79ff30ff04ca9fc7546" name="apps/pc_frontend/modules/diary/templates/_myDiaryList.php" role="data" />
+   <file baseinstalldir="/" md5sum="e6658202fe956f815de942ddfeb89e64" name="apps/pc_frontend/modules/diary/templates/_friendDiaryList.php" role="data" />
+   <file baseinstalldir="/" md5sum="80ae570302ae2423111b51621d0d2406" name="apps/pc_frontend/modules/diary/templates/_memberDiaryList.php" role="data" />
+   <file baseinstalldir="/" md5sum="542743315e510197318bc0a14e8476cd" name="apps/pc_frontend/modules/diary/templates/_myDiaryList.php" role="data" />
    <file baseinstalldir="/" md5sum="e240444801d1080e5f819c39a2ff3b57" name="apps/pc_frontend/modules/diary/templates/_sidemenu.php" role="data" />
-   <file baseinstalldir="/" md5sum="637feb64242c15259aa9eac44722aab0" name="apps/pc_frontend/modules/diary/templates/_smtDiaryMember.php" role="data" />
+   <file baseinstalldir="/" md5sum="fa21371b25a6d017bb10c9f65ed63bf2" name="apps/pc_frontend/modules/diary/templates/_smtDiaryMember.php" role="data" />
    <file baseinstalldir="/" md5sum="215388c81a68b7a8fc324dcb65bd9323" name="apps/pc_frontend/modules/diaryComment/actions/actions.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b83253a5b2a40ee6b472311b1dc5992a" name="apps/pc_frontend/modules/diaryComment/actions/components.class.php" role="data" />
    <file baseinstalldir="/" md5sum="b854ac284198fb6cd48badcec20a6671" name="apps/pc_frontend/modules/diaryComment/config/view.yml" role="data" />
    <file baseinstalldir="/" md5sum="2ea2d5698c2632332a3cb87e76d50abe" name="apps/pc_frontend/modules/diaryComment/templates/deleteConfirmSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="cbf4be087513a8401a487b773cb3ac51" name="apps/pc_frontend/modules/diaryComment/templates/historySuccess.php" role="data" />
-   <file baseinstalldir="/" md5sum="191414f30217c8677f632d6183b88a09" name="apps/pc_frontend/modules/diaryComment/templates/_history.php" role="data" />
-   <file baseinstalldir="/" md5sum="82bf94236c29d3a3df9950f5af0104c0" name="apps/pc_frontend/modules/diaryComment/templates/_list.php" role="data" />
+   <file baseinstalldir="/" md5sum="29ef7df5d70ef5e263d7c72089c982e0" name="apps/pc_frontend/modules/diaryComment/templates/_history.php" role="data" />
+   <file baseinstalldir="/" md5sum="5006cab7412030c9577e0c74d4c7b67c" name="apps/pc_frontend/modules/diaryComment/templates/_list.php" role="data" />
    <file baseinstalldir="/" md5sum="bd629dc27b2e987fd56449029002166e" name="apps/pc_frontend/modules/member/config/view.yml" role="data" />
    <file baseinstalldir="/" md5sum="c60813fb3120d9d24484b8ddfc065cbd" name="config/activity_template.yml" role="data" />
    <file baseinstalldir="/" md5sum="c5d97ca6de8838c8cb09f802dd46fa30" name="config/gadget.yml" role="data" />
@@ -607,13 +607,13 @@ Bug（バグ） #3071: OpenPNE2系からOpenPNE 3.6.4 より前のバージョ�
     <api>1.4.2</api>
    </version>
    <stability>
-    <release>devel</release>
-    <api>devel</api>
+    <release>beta</release>
+    <api>beta</api>
    </stability>
-   <date>2012-12-06</date>
+   <date>2012-12-12</date>
    <license>apache</license>
    <notes>
-devel release.
+beta release.
    </notes>
   </release>
  </changelog>
