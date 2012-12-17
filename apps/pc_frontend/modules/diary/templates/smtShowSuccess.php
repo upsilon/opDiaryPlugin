@@ -30,7 +30,7 @@ op_smt_use_stylesheet('/opLikePlugin/css/like-smartphone.css', 'last');
     {{/each}}
   </div>
   <!-- Like Plugin -->
-  <div class="row like-wrapper" data-like-id="${id}" data-like-target="D" member-id="${member.id}">
+  <div class="row like-wrapper" data-like-id="${id}" data-like-target="D" member-id="${member.id}" style="display: none;">
     <span class="span6"> 
       <a class="like-post">いいね！</a>
       <a class="like-cancel">いいね！を取り消す</a>
@@ -77,7 +77,7 @@ op_smt_use_stylesheet('/opLikePlugin/css/like-smartphone.css', 'last');
         {{/each}}
       </div>
       <!-- Like Plugin -->
-      <div class="row like-wrapper" data-like-id="${id}" data-like-target="d" member-id="${member.id}">
+      <div class="row like-wrapper" data-like-id="${id}" data-like-target="d" member-id="${member.id}" style="display: none;">
         <span class="span5"> 
           <a class="like-post">いいね！</a>
           <a class="like-cancel">いいね！を取り消す</a>
