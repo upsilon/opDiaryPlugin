@@ -31,19 +31,19 @@
   <email />
   <active>yes</active>
  </lead>
- <date>2012-12-12</date>
- <time>19:42:16</time>
+ <date>2012-12-18</date>
+ <time>11:38:54</time>
  <version>
-  <release>1.4.2</release>
-  <api>1.4.2</api>
+  <release>1.4.3</release>
+  <api>1.4.3</api>
  </version>
  <stability>
-  <release>beta</release>
-  <api>beta</api>
+  <release>alpha</release>
+  <api>alpha</api>
  </stability>
  <license>apache</license>
  <notes>
-beta release.
+alpha release.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -122,7 +122,7 @@ beta release.
    <file baseinstalldir="/" md5sum="35d01b5a8e7a0e25e494f130a7fbb546" name="apps/pc_frontend/modules/diary/templates/showSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="65a88fa0af4ac8c61d97364116bb5dac" name="apps/pc_frontend/modules/diary/templates/smtListSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="fd83507211f6747dbbdddf6c119a97ff" name="apps/pc_frontend/modules/diary/templates/smtPostSuccess.php" role="data" />
-   <file baseinstalldir="/" md5sum="fbf8e58064dbea2a491f3d2679f9081b" name="apps/pc_frontend/modules/diary/templates/smtShowSuccess.php" role="data" />
+   <file baseinstalldir="/" md5sum="7320b179e19b4c61e121479b51241411" name="apps/pc_frontend/modules/diary/templates/smtShowSuccess.php" role="data" />
    <file baseinstalldir="/" md5sum="edee856bbf8c4fafec721562e960cb2b" name="apps/pc_frontend/modules/diary/templates/_cautionUnreadDiaryComment.php" role="data" />
    <file baseinstalldir="/" md5sum="32857468f71792f8ac1c4fcfb4b93303" name="apps/pc_frontend/modules/diary/templates/_diaryList.php" role="data" />
    <file baseinstalldir="/" md5sum="b102ea1f7a86793e9d38cfc1f7943d0e" name="apps/pc_frontend/modules/diary/templates/_form.php" role="data" />
@@ -614,6 +614,21 @@ Bug（バグ） #3071: OpenPNE2系からOpenPNE 3.6.4 より前のバージョ�
    <license>apache</license>
    <notes>
 beta release.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.4.3</release>
+    <api>1.4.3</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2012-12-18</date>
+   <license>apache</license>
+   <notes>
+alpha release.
    </notes>
   </release>
  </changelog>
