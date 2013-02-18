@@ -2,9 +2,7 @@
 use_helper('opAsset');
 op_smt_use_javascript('/opDiaryPlugin/js/bootstrap-modal.js', 'last');
 op_smt_use_javascript('/opDiaryPlugin/js/bootstrap-transition.js', 'last');
-op_smt_use_javascript('/opLikePlugin/js/like-smartphone.js', 'last');
 op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
-op_smt_use_stylesheet('/opLikePlugin/css/like-smartphone.css', 'last');
 ?>
 <script id="diaryEntry" type="text/x-jquery-tmpl">
   <div class="row">
@@ -28,16 +26,6 @@ op_smt_use_stylesheet('/opLikePlugin/css/like-smartphone.css', 'last');
     {{each images}}
       <div class="span4"><a href="${$value.filename}" target="_blank">{{html $value.imagetag}}</a></div>
     {{/each}}
-  </div>
-  <!-- Like Plugin -->
-  <div class="row like-wrapper" data-like-id="${id}" data-like-target="D" member-id="${member.id}" style="display: none;">
-    <span class="span6"> 
-      <a class="like-post">いいね！</a>
-      <a class="like-cancel">いいね！を取り消す</a>
-    </span>
-    <span class="span6">
-      <a class="like-list"></a>
-    </span>
   </div>
   {{tmpl "#diarySiblings"}}
   <div class="row" id="comments">
@@ -75,16 +63,6 @@ op_smt_use_stylesheet('/opLikePlugin/css/like-smartphone.css', 'last');
         {{each images}}
           <div class="span3"><a href="${$value.filename}" target="_blank">{{html $value.imagetag}}</a></div>
         {{/each}}
-      </div>
-      <!-- Like Plugin -->
-      <div class="row like-wrapper" data-like-id="${id}" data-like-target="d" member-id="${member.id}" style="display: none;">
-        <span class="span5"> 
-          <a class="like-post">いいね！</a>
-          <a class="like-cancel">いいね！を取り消す</a>
-        </span>
-        <span class="span2">
-          <a class="like-list"></a>
-        </span>
       </div>
     </div>
   </div>

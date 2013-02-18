@@ -36,17 +36,6 @@
 <?php endif; ?>
 <?php echo op_url_cmd(op_decoration(nl2br($diary->body))) ?>
 </div>
-<!--Like Plugin -->
-<div class="like" style="display: none;">
-<span class="like-wrapper" data-like-id="<?php echo $diary->getId() ?>" data-like-target="D" member-id="<?php echo $diary->member_id ?>">
-<span class="like-post">いいね！</span>
-<span class="like-cancel">いいね！を取り消す&nbsp;</span>
-<span class="like-you">あなたが「いいね！」と言っています。</span><br />
-<a class="like-list" href="#likeModal" data-toggle="modal"></a>
-<div class="like-list-member"></div>
-<span class="like-friend-list"></span>
-</span>
-</div>
 </dd>
 </dl>
 <?php if ($diary->member_id === $myMemberId): ?>
