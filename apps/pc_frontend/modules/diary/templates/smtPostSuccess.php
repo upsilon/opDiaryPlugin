@@ -107,15 +107,10 @@ $(function(){
         {
           alert('ファイルサイズが大きすぎます。');
         }
-        else if (-1 !== em.indexOf('File upload stopped by extension'))
-        {
-          alert('ファイル拡張子が対応していません。');
-        }
         else
         {
           alert('ファイルアップロードに失敗しました。');
         }
-        //alert(e.responseText);
       },
       complete: function() {
         toggleSubmitState();
