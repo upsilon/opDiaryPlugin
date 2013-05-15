@@ -15,9 +15,10 @@ else
   $diaryBody  = '';
   $publicFlag = 1;
 }
-use_helper('opAsset');
+use_helper('opAsset', 'opDiary');
 op_smt_use_stylesheet('/opDiaryPlugin/css/smt-diary.css', 'last');
 op_smt_use_javascript('jquery-ui.min.js', 'last');
+op_smt_use_javascript('/opDiaryPlugin/js/jquery.upload-1.0.2.min.js', 'last');
 op_smt_use_javascript('op_emoji.js', 'last');
 op_smt_use_javascript('Selection.js', 'last');
 op_smt_use_javascript('decoration.js', 'last');
@@ -38,11 +39,17 @@ function getParams()
 {
   var query = $('form').serializeArray(),
   json = {apiKey: openpne.apiKey};
-
   for (i in query)
   {
     json[query[i].name] = query[i].value
   }
+
+  $('input[type="file"]').each(function() {
+    if ($(this).val())
+    {
+      json[$(this).attr('name')] = $(this).val();
+    }
+  });
 
   return json;
 }
@@ -61,37 +68,59 @@ $(function(){
     $('#successMessage').html('');
     toggleSubmitState();
     var params = getParams();
+    var form = $('form');
+    var fd = new FormData(form[0]);
 
-    $.post(openpne.apiBase + "diary/post.json",
-      params,
-      'json'
-    )
-    .success(
-      function(res)
-      {
+    for (i in params)
+    {
+      fd.append(i, params[i]);
+    }
+
+    $.ajax({
+      url: openpne.apiBase + "diary/post.json",
+      type: 'POST',
+      processData: false,
+      contentType: false,
+      data: fd,
+      dataType: 'json',
+      success: function(res) {
         if (params['id'] == '')
         {
           $('#id').val('');
           $('#title').val('');
           $('#diary_body').val('');
           $('#diary_public_flag_1').attr('checked', true);
+          $('#diary_photo_1').val('');
+          $('#diary_photo_2').val('');
+          $('#diary_photo_3').val('');
         }
         var _mes = $('#successMessageTemplate').tmpl(res['data']);
         $('#successMessage').html(_mes);
-      }
-    )
-    .error(
-      function(res)
-      {
-        console.log(res);
-      }
-    )
-    .complete(
-      function(res)
-      {
+      },
+      error: function(e) {
+        var em = e.responseText;
+        if (-1 !== em.indexOf('Invalid mime type'))
+        {
+          alert('ファイル形式が間違っています。');
+        }
+        else if (-1 !== em.indexOf('File is too large'))
+        {
+          alert('ファイルサイズが大きすぎます。');
+        }
+        else if (-1 !== em.indexOf('File upload stopped by extension'))
+        {
+          alert('ファイル拡張子が対応していません。');
+        }
+        else
+        {
+          alert('ファイルアップロードに失敗しました。');
+        }
+        //alert(e.responseText);
+      },
+      complete: function() {
         toggleSubmitState();
       }
-    );
+    });
   });
 })
 </script>
@@ -116,6 +145,28 @@ $(function(){
       <li><input name="public_flag" value="<?php echo $key;?>" id="diary_public_flag_<?php echo $key;?>" class="input_radio" type="radio" <?php if($publicFlag == $key) echo 'checked'?>>&nbsp;<label for="diary_public_flag_<?php echo $key;?>"><?php echo $value;?></label></li>
     <?php endforeach; ?>
     </ul>
+    <table class="file_list">
+      <?php if (!is_null($diary) && $diary->has_images): ?>
+        <?php $diaryImages = array() ?>
+        <?php foreach ($diary->getDiaryImages() as $image): ?>
+          <?php $diaryImages[$image->getNumber()] = $image ?>
+        <?php endforeach; ?>
+      <?php endif; ?>
+      <?php for ($i = 1; $i <= 3; $i++): ?>
+      <tr>
+        <td class="file_label"><label for="diary_photo_<?php echo $i ?>"><?php echo __('Photo').$i ?></label></td>
+        <td>
+          <?php if (isset($diaryImages[$i])): ?>
+          <?php $diaryImage = op_api_diary_image($diaryImages[$i]) ?>
+          <p><a href="<?php echo $diaryImage['filename'] ?>"><?php echo $diaryImage['imagetag'] ?></a></p>
+          <input type="checkbox" name="diary_photo_<?php echo $i ?>_photo_delete" id="diary_photo_<?php echo $i ?>_photo_delete" />
+          <label for="diary_photo_<?php echo $i ?>_photo_delete"><?php echo __('remove the current photo') ?></label>
+          <?php endif; ?>
+          <input type="file" name="diary_photo_<?php echo $i ?>" id="diary_photo_<?php echo $i ?>" />
+        </td>
+      </tr>
+      <?php endfor; ?>
+    </table>
     </form>
     <div class="center">
       <input type="submit" name="submit" value="<?php echo __('Post') ?>" id="post_diary" class="btn btn-primary span12" />

@@ -42,12 +42,66 @@ class diaryActions extends opJsonApiActions
       $diary = new Diary();
       $diary->setMemberId($this->member->getId());
     }
+
     $diary->setTitle($request['title']);
     $diary->setBody($request['body']);
     $diary->setPublicFlag($request['public_flag']);
     $diary->save();
 
     $this->diary = $diary;
+
+    for ($i = 1; $i <= 3; $i++)
+    {
+      $diaryImage = Doctrine::getTable('DiaryImage')->retrieveByDiaryIdAndNumber($diary->getId(), $i);
+
+      $filename = basename($_FILES['diary_photo_'.$i]['name']);
+      if (!is_null($filename) && '' !== $filename)
+      {
+        try
+        {
+          $validator = new opValidatorImageFile(array('required' => false));
+          $validFile = $validator->clean($_FILES['diary_photo_'.$i]);
+        }
+        catch (Exception $e)
+        {
+          $this->forward400($e->getMessage());
+        }
+
+        $f = new File();
+        $f->setFromValidatedFile($validFile);
+        $f->setName(hash('md5', uniqid((string)$i).$filename));
+        if ($stream = fopen($_FILES['diary_photo_'.$i]['tmp_name'], 'r'))
+        {
+          if (!is_null($diaryImage))
+          {
+            $diaryImage->delete();
+          }
+
+          $bin = new FileBin();
+          $bin->setBin(stream_get_contents($stream));
+          $f->setFileBin($bin);
+          $f->save();
+
+          $di = new DiaryImage();
+          $di->setDiaryId($diary->getId());
+          $di->setFileId($f->getId());
+          $di->setNumber($i);
+          $di->save();
+
+          $diary->updateHasImages();
+        }
+        else
+        {
+          $this->forward400(__('Failed to write file to disk.'));
+        }
+      }
+
+      $deleteCheck = $request['diary_photo_'.$i.'_photo_delete'];
+      if ('on' === $deleteCheck && !is_null($diaryImage))
+      {
+        $diaryImage->delete();
+      }
+    }
   }
 
   public function executeDelete(sfWebRequest $request)

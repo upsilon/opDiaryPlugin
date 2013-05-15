@@ -16,4 +16,11 @@
  */
 abstract class PluginDiaryImageTable extends Doctrine_Table
 {
+  public function retrieveByDiaryIdAndNumber($diaryId, $number)
+  {
+    return $this->createQuery()
+      ->where('diary_id = ?', $diaryId)
+      ->andWhere('number = ?', $number)
+      ->execute();
+  }
 }

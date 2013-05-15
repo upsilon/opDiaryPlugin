@@ -16,6 +16,26 @@
   margin-right: 5px;
 }
 
+.file_list {
+  margin-left: 4px;
+}
+
+.file_list td {
+  height: 35px;
+  padding: 5px 0 !important;
+}
+
+.file_list input[type="file"] {
+  margin: 0;
+  height: 22px;
+  line-height: 22px;
+  width: 238px;
+}
+
+.file_label {
+  width: 77px;
+}
+
 #show .images a {
   display: block;
   margin: 5px;
