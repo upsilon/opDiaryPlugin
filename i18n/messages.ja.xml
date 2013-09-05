@@ -310,6 +310,10 @@
         <source>over %years% years ago</source>
         <target>%years%年以上前</target>
       </trans-unit>
+      <trans-unit id="">
+        <source>Diary of %1% have new comments</source>
+        <target>%1%さんの日記に新着コメントがあります</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

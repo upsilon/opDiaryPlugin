@@ -33,7 +33,7 @@ abstract class PluginDiaryComment extends BaseDiaryComment
       Doctrine::getTable('DiaryCommentUnread')->register($this->Diary);
       Doctrine::getTable('DiaryCommentUpdate')->update($this->Diary, $this->Member);
 
-      opDiaryPluginUtil::sendNotification($fromMember, $this->Diary->getMember(), $this->Diary->getId());
+      opDiaryPluginUtil::sendNotification($fromMember, $this->Diary->getMember(), $this->Diary);
     }
 
     //同じ日記エントリにコメントをしている人に通知を飛ばす
@@ -51,7 +51,7 @@ abstract class PluginDiaryComment extends BaseDiaryComment
     }
     foreach($toMembers as $toMember)
     {
-      opDiaryPluginUtil::sendNotification($fromMember, $toMember, $this->Diary->getId());
+      opDiaryPluginUtil::sendNotification($fromMember, $toMember, $this->Diary);
     }
 
   }
